@@ -1,0 +1,16 @@
+{
+  "locales": ["en", "fr"],
+  "global": {
+    "prefix": "Porsche"
+  },
+  "banners": {
+    "en": {
+      "300x250": {
+        "size": { "w": 300, "h": 250 }
+      }
+    },
+    "fr": {
+      "300x250": {}
+    }
+  }
+}
