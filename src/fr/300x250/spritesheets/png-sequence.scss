@@ -1,0 +1,420 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$phone0001-name: 'phone0001';
+$phone0001-x: 0px;
+$phone0001-y: 1000px;
+$phone0001-offset-x: 0px;
+$phone0001-offset-y: -1000px;
+$phone0001-width: 218px;
+$phone0001-height: 200px;
+$phone0001-total-width: 1744px;
+$phone0001-total-height: 1600px;
+$phone0001-image: 'png-sequence.png';
+$phone0001: (0px, 1000px, 0px, -1000px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0001', );
+$phone0002-name: 'phone0002';
+$phone0002-x: 436px;
+$phone0002-y: 1200px;
+$phone0002-offset-x: -436px;
+$phone0002-offset-y: -1200px;
+$phone0002-width: 218px;
+$phone0002-height: 200px;
+$phone0002-total-width: 1744px;
+$phone0002-total-height: 1600px;
+$phone0002-image: 'png-sequence.png';
+$phone0002: (436px, 1200px, -436px, -1200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0002', );
+$phone0003-name: 'phone0003';
+$phone0003-x: 218px;
+$phone0003-y: 1000px;
+$phone0003-offset-x: -218px;
+$phone0003-offset-y: -1000px;
+$phone0003-width: 218px;
+$phone0003-height: 200px;
+$phone0003-total-width: 1744px;
+$phone0003-total-height: 1600px;
+$phone0003-image: 'png-sequence.png';
+$phone0003: (218px, 1000px, -218px, -1000px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0003', );
+$phone0004-name: 'phone0004';
+$phone0004-x: 436px;
+$phone0004-y: 1000px;
+$phone0004-offset-x: -436px;
+$phone0004-offset-y: -1000px;
+$phone0004-width: 218px;
+$phone0004-height: 200px;
+$phone0004-total-width: 1744px;
+$phone0004-total-height: 1600px;
+$phone0004-image: 'png-sequence.png';
+$phone0004: (436px, 1000px, -436px, -1000px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0004', );
+$phone0005-name: 'phone0005';
+$phone0005-x: 654px;
+$phone0005-y: 1000px;
+$phone0005-offset-x: -654px;
+$phone0005-offset-y: -1000px;
+$phone0005-width: 218px;
+$phone0005-height: 200px;
+$phone0005-total-width: 1744px;
+$phone0005-total-height: 1600px;
+$phone0005-image: 'png-sequence.png';
+$phone0005: (654px, 1000px, -654px, -1000px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0005', );
+$phone0006-name: 'phone0006';
+$phone0006-x: 872px;
+$phone0006-y: 1000px;
+$phone0006-offset-x: -872px;
+$phone0006-offset-y: -1000px;
+$phone0006-width: 218px;
+$phone0006-height: 200px;
+$phone0006-total-width: 1744px;
+$phone0006-total-height: 1600px;
+$phone0006-image: 'png-sequence.png';
+$phone0006: (872px, 1000px, -872px, -1000px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0006', );
+$phone0007-name: 'phone0007';
+$phone0007-x: 1090px;
+$phone0007-y: 1000px;
+$phone0007-offset-x: -1090px;
+$phone0007-offset-y: -1000px;
+$phone0007-width: 218px;
+$phone0007-height: 200px;
+$phone0007-total-width: 1744px;
+$phone0007-total-height: 1600px;
+$phone0007-image: 'png-sequence.png';
+$phone0007: (1090px, 1000px, -1090px, -1000px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0007', );
+$phone0008-name: 'phone0008';
+$phone0008-x: 1308px;
+$phone0008-y: 0px;
+$phone0008-offset-x: -1308px;
+$phone0008-offset-y: 0px;
+$phone0008-width: 218px;
+$phone0008-height: 200px;
+$phone0008-total-width: 1744px;
+$phone0008-total-height: 1600px;
+$phone0008-image: 'png-sequence.png';
+$phone0008: (1308px, 0px, -1308px, 0px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0008', );
+$phone0009-name: 'phone0009';
+$phone0009-x: 1308px;
+$phone0009-y: 200px;
+$phone0009-offset-x: -1308px;
+$phone0009-offset-y: -200px;
+$phone0009-width: 218px;
+$phone0009-height: 200px;
+$phone0009-total-width: 1744px;
+$phone0009-total-height: 1600px;
+$phone0009-image: 'png-sequence.png';
+$phone0009: (1308px, 200px, -1308px, -200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0009', );
+$phone0010-name: 'phone0010';
+$phone0010-x: 1308px;
+$phone0010-y: 400px;
+$phone0010-offset-x: -1308px;
+$phone0010-offset-y: -400px;
+$phone0010-width: 218px;
+$phone0010-height: 200px;
+$phone0010-total-width: 1744px;
+$phone0010-total-height: 1600px;
+$phone0010-image: 'png-sequence.png';
+$phone0010: (1308px, 400px, -1308px, -400px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0010', );
+$phone0011-name: 'phone0011';
+$phone0011-x: 1308px;
+$phone0011-y: 600px;
+$phone0011-offset-x: -1308px;
+$phone0011-offset-y: -600px;
+$phone0011-width: 218px;
+$phone0011-height: 200px;
+$phone0011-total-width: 1744px;
+$phone0011-total-height: 1600px;
+$phone0011-image: 'png-sequence.png';
+$phone0011: (1308px, 600px, -1308px, -600px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0011', );
+$phone0012-name: 'phone0012';
+$phone0012-x: 1308px;
+$phone0012-y: 800px;
+$phone0012-offset-x: -1308px;
+$phone0012-offset-y: -800px;
+$phone0012-width: 218px;
+$phone0012-height: 200px;
+$phone0012-total-width: 1744px;
+$phone0012-total-height: 1600px;
+$phone0012-image: 'png-sequence.png';
+$phone0012: (1308px, 800px, -1308px, -800px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0012', );
+$phone0013-name: 'phone0013';
+$phone0013-x: 1308px;
+$phone0013-y: 1000px;
+$phone0013-offset-x: -1308px;
+$phone0013-offset-y: -1000px;
+$phone0013-width: 218px;
+$phone0013-height: 200px;
+$phone0013-total-width: 1744px;
+$phone0013-total-height: 1600px;
+$phone0013-image: 'png-sequence.png';
+$phone0013: (1308px, 1000px, -1308px, -1000px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0013', );
+$phone0014-name: 'phone0014';
+$phone0014-x: 0px;
+$phone0014-y: 1200px;
+$phone0014-offset-x: 0px;
+$phone0014-offset-y: -1200px;
+$phone0014-width: 218px;
+$phone0014-height: 200px;
+$phone0014-total-width: 1744px;
+$phone0014-total-height: 1600px;
+$phone0014-image: 'png-sequence.png';
+$phone0014: (0px, 1200px, 0px, -1200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0014', );
+$phone0015-name: 'phone0015';
+$phone0015-x: 218px;
+$phone0015-y: 1200px;
+$phone0015-offset-x: -218px;
+$phone0015-offset-y: -1200px;
+$phone0015-width: 218px;
+$phone0015-height: 200px;
+$phone0015-total-width: 1744px;
+$phone0015-total-height: 1600px;
+$phone0015-image: 'png-sequence.png';
+$phone0015: (218px, 1200px, -218px, -1200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0015', );
+$phone0016-name: 'phone0016';
+$phone0016-x: 654px;
+$phone0016-y: 1400px;
+$phone0016-offset-x: -654px;
+$phone0016-offset-y: -1400px;
+$phone0016-width: 218px;
+$phone0016-height: 200px;
+$phone0016-total-width: 1744px;
+$phone0016-total-height: 1600px;
+$phone0016-image: 'png-sequence.png';
+$phone0016: (654px, 1400px, -654px, -1400px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0016', );
+$phone0017-name: 'phone0017';
+$phone0017-x: 654px;
+$phone0017-y: 1200px;
+$phone0017-offset-x: -654px;
+$phone0017-offset-y: -1200px;
+$phone0017-width: 218px;
+$phone0017-height: 200px;
+$phone0017-total-width: 1744px;
+$phone0017-total-height: 1600px;
+$phone0017-image: 'png-sequence.png';
+$phone0017: (654px, 1200px, -654px, -1200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0017', );
+$phone0018-name: 'phone0018';
+$phone0018-x: 872px;
+$phone0018-y: 1200px;
+$phone0018-offset-x: -872px;
+$phone0018-offset-y: -1200px;
+$phone0018-width: 218px;
+$phone0018-height: 200px;
+$phone0018-total-width: 1744px;
+$phone0018-total-height: 1600px;
+$phone0018-image: 'png-sequence.png';
+$phone0018: (872px, 1200px, -872px, -1200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0018', );
+$phone0019-name: 'phone0019';
+$phone0019-x: 1090px;
+$phone0019-y: 1200px;
+$phone0019-offset-x: -1090px;
+$phone0019-offset-y: -1200px;
+$phone0019-width: 218px;
+$phone0019-height: 200px;
+$phone0019-total-width: 1744px;
+$phone0019-total-height: 1600px;
+$phone0019-image: 'png-sequence.png';
+$phone0019: (1090px, 1200px, -1090px, -1200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0019', );
+$phone0020-name: 'phone0020';
+$phone0020-x: 1308px;
+$phone0020-y: 1200px;
+$phone0020-offset-x: -1308px;
+$phone0020-offset-y: -1200px;
+$phone0020-width: 218px;
+$phone0020-height: 200px;
+$phone0020-total-width: 1744px;
+$phone0020-total-height: 1600px;
+$phone0020-image: 'png-sequence.png';
+$phone0020: (1308px, 1200px, -1308px, -1200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0020', );
+$phone0021-name: 'phone0021';
+$phone0021-x: 1526px;
+$phone0021-y: 0px;
+$phone0021-offset-x: -1526px;
+$phone0021-offset-y: 0px;
+$phone0021-width: 218px;
+$phone0021-height: 200px;
+$phone0021-total-width: 1744px;
+$phone0021-total-height: 1600px;
+$phone0021-image: 'png-sequence.png';
+$phone0021: (1526px, 0px, -1526px, 0px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0021', );
+$phone0022-name: 'phone0022';
+$phone0022-x: 1526px;
+$phone0022-y: 200px;
+$phone0022-offset-x: -1526px;
+$phone0022-offset-y: -200px;
+$phone0022-width: 218px;
+$phone0022-height: 200px;
+$phone0022-total-width: 1744px;
+$phone0022-total-height: 1600px;
+$phone0022-image: 'png-sequence.png';
+$phone0022: (1526px, 200px, -1526px, -200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0022', );
+$phone0023-name: 'phone0023';
+$phone0023-x: 1526px;
+$phone0023-y: 400px;
+$phone0023-offset-x: -1526px;
+$phone0023-offset-y: -400px;
+$phone0023-width: 218px;
+$phone0023-height: 200px;
+$phone0023-total-width: 1744px;
+$phone0023-total-height: 1600px;
+$phone0023-image: 'png-sequence.png';
+$phone0023: (1526px, 400px, -1526px, -400px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0023', );
+$phone0024-name: 'phone0024';
+$phone0024-x: 1526px;
+$phone0024-y: 600px;
+$phone0024-offset-x: -1526px;
+$phone0024-offset-y: -600px;
+$phone0024-width: 218px;
+$phone0024-height: 200px;
+$phone0024-total-width: 1744px;
+$phone0024-total-height: 1600px;
+$phone0024-image: 'png-sequence.png';
+$phone0024: (1526px, 600px, -1526px, -600px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0024', );
+$phone0025-name: 'phone0025';
+$phone0025-x: 1526px;
+$phone0025-y: 800px;
+$phone0025-offset-x: -1526px;
+$phone0025-offset-y: -800px;
+$phone0025-width: 218px;
+$phone0025-height: 200px;
+$phone0025-total-width: 1744px;
+$phone0025-total-height: 1600px;
+$phone0025-image: 'png-sequence.png';
+$phone0025: (1526px, 800px, -1526px, -800px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0025', );
+$phone0026-name: 'phone0026';
+$phone0026-x: 1526px;
+$phone0026-y: 1000px;
+$phone0026-offset-x: -1526px;
+$phone0026-offset-y: -1000px;
+$phone0026-width: 218px;
+$phone0026-height: 200px;
+$phone0026-total-width: 1744px;
+$phone0026-total-height: 1600px;
+$phone0026-image: 'png-sequence.png';
+$phone0026: (1526px, 1000px, -1526px, -1000px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0026', );
+$phone0027-name: 'phone0027';
+$phone0027-x: 1526px;
+$phone0027-y: 1200px;
+$phone0027-offset-x: -1526px;
+$phone0027-offset-y: -1200px;
+$phone0027-width: 218px;
+$phone0027-height: 200px;
+$phone0027-total-width: 1744px;
+$phone0027-total-height: 1600px;
+$phone0027-image: 'png-sequence.png';
+$phone0027: (1526px, 1200px, -1526px, -1200px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0027', );
+$phone0028-name: 'phone0028';
+$phone0028-x: 0px;
+$phone0028-y: 1400px;
+$phone0028-offset-x: 0px;
+$phone0028-offset-y: -1400px;
+$phone0028-width: 218px;
+$phone0028-height: 200px;
+$phone0028-total-width: 1744px;
+$phone0028-total-height: 1600px;
+$phone0028-image: 'png-sequence.png';
+$phone0028: (0px, 1400px, 0px, -1400px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0028', );
+$phone0029-name: 'phone0029';
+$phone0029-x: 218px;
+$phone0029-y: 1400px;
+$phone0029-offset-x: -218px;
+$phone0029-offset-y: -1400px;
+$phone0029-width: 218px;
+$phone0029-height: 200px;
+$phone0029-total-width: 1744px;
+$phone0029-total-height: 1600px;
+$phone0029-image: 'png-sequence.png';
+$phone0029: (218px, 1400px, -218px, -1400px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0029', );
+$phone0030-name: 'phone0030';
+$phone0030-x: 436px;
+$phone0030-y: 1400px;
+$phone0030-offset-x: -436px;
+$phone0030-offset-y: -1400px;
+$phone0030-width: 218px;
+$phone0030-height: 200px;
+$phone0030-total-width: 1744px;
+$phone0030-total-height: 1600px;
+$phone0030-image: 'png-sequence.png';
+$phone0030: (436px, 1400px, -436px, -1400px, 218px, 200px, 1744px, 1600px, 'png-sequence.png', 'phone0030', );
+$png-sequence-name: 'png-sequence';
+$png-sequence-x: 0px;
+$png-sequence-y: 0px;
+$png-sequence-offset-x: 0px;
+$png-sequence-offset-y: 0px;
+$png-sequence-width: 1308px;
+$png-sequence-height: 1000px;
+$png-sequence-total-width: 1744px;
+$png-sequence-total-height: 1600px;
+$png-sequence-image: 'png-sequence.png';
+$png-sequence: (0px, 0px, 0px, 0px, 1308px, 1000px, 1744px, 1600px, 'png-sequence.png', 'png-sequence', );
+$spritesheet-width: 1744px;
+$spritesheet-height: 1600px;
+$spritesheet-image: 'png-sequence.png';
+$spritesheet-sprites: ($phone0001, $phone0002, $phone0003, $phone0004, $phone0005, $phone0006, $phone0007, $phone0008, $phone0009, $phone0010, $phone0011, $phone0012, $phone0013, $phone0014, $phone0015, $phone0016, $phone0017, $phone0018, $phone0019, $phone0020, $phone0021, $phone0022, $phone0023, $phone0024, $phone0025, $phone0026, $phone0027, $phone0028, $phone0029, $phone0030, $png-sequence, );
+$spritesheet: (1744px, 1600px, 'png-sequence.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

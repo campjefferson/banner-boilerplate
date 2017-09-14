@@ -1,0 +1,167 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$copy-name: 'copy';
+$copy-x: 0px;
+$copy-y: 0px;
+$copy-offset-x: 0px;
+$copy-offset-y: 0px;
+$copy-width: 1800px;
+$copy-height: 1500px;
+$copy-total-width: 2400px;
+$copy-total-height: 2000px;
+$copy-image: 'copy.png';
+$copy: (0px, 0px, 0px, 0px, 1800px, 1500px, 2400px, 2000px, 'copy.png', 'copy', );
+$copy4a-name: 'copy4a';
+$copy4a-x: 1800px;
+$copy4a-y: 0px;
+$copy4a-offset-x: -1800px;
+$copy4a-offset-y: 0px;
+$copy4a-width: 600px;
+$copy4a-height: 500px;
+$copy4a-total-width: 2400px;
+$copy4a-total-height: 2000px;
+$copy4a-image: 'copy.png';
+$copy4a: (1800px, 0px, -1800px, 0px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4a', );
+$copy4b-name: 'copy4b';
+$copy4b-x: 1800px;
+$copy4b-y: 500px;
+$copy4b-offset-x: -1800px;
+$copy4b-offset-y: -500px;
+$copy4b-width: 600px;
+$copy4b-height: 500px;
+$copy4b-total-width: 2400px;
+$copy4b-total-height: 2000px;
+$copy4b-image: 'copy.png';
+$copy4b: (1800px, 500px, -1800px, -500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4b', );
+$copy4c-name: 'copy4c';
+$copy4c-x: 1800px;
+$copy4c-y: 1000px;
+$copy4c-offset-x: -1800px;
+$copy4c-offset-y: -1000px;
+$copy4c-width: 600px;
+$copy4c-height: 500px;
+$copy4c-total-width: 2400px;
+$copy4c-total-height: 2000px;
+$copy4c-image: 'copy.png';
+$copy4c: (1800px, 1000px, -1800px, -1000px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4c', );
+$copy4d-name: 'copy4d';
+$copy4d-x: 0px;
+$copy4d-y: 1500px;
+$copy4d-offset-x: 0px;
+$copy4d-offset-y: -1500px;
+$copy4d-width: 600px;
+$copy4d-height: 500px;
+$copy4d-total-width: 2400px;
+$copy4d-total-height: 2000px;
+$copy4d-image: 'copy.png';
+$copy4d: (0px, 1500px, 0px, -1500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4d', );
+$copy4e-name: 'copy4e';
+$copy4e-x: 600px;
+$copy4e-y: 1500px;
+$copy4e-offset-x: -600px;
+$copy4e-offset-y: -1500px;
+$copy4e-width: 600px;
+$copy4e-height: 500px;
+$copy4e-total-width: 2400px;
+$copy4e-total-height: 2000px;
+$copy4e-image: 'copy.png';
+$copy4e: (600px, 1500px, -600px, -1500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4e', );
+$copy4f-name: 'copy4f';
+$copy4f-x: 1200px;
+$copy4f-y: 1500px;
+$copy4f-offset-x: -1200px;
+$copy4f-offset-y: -1500px;
+$copy4f-width: 600px;
+$copy4f-height: 500px;
+$copy4f-total-width: 2400px;
+$copy4f-total-height: 2000px;
+$copy4f-image: 'copy.png';
+$copy4f: (1200px, 1500px, -1200px, -1500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4f', );
+$logo-name: 'logo';
+$logo-x: 1800px;
+$logo-y: 1500px;
+$logo-offset-x: -1800px;
+$logo-offset-y: -1500px;
+$logo-width: 600px;
+$logo-height: 500px;
+$logo-total-width: 2400px;
+$logo-total-height: 2000px;
+$logo-image: 'copy.png';
+$logo: (1800px, 1500px, -1800px, -1500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'logo', );
+$spritesheet-width: 2400px;
+$spritesheet-height: 2000px;
+$spritesheet-image: 'copy.png';
+$spritesheet-sprites: ($copy, $copy4a, $copy4b, $copy4c, $copy4d, $copy4e, $copy4f, $logo, );
+$spritesheet: (2400px, 2000px, 'copy.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

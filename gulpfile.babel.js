@@ -141,23 +141,24 @@ gulp.task("size", done => {
 });
 
 gulp.task("spritesheet", done => {
-  const spritesheets = glob.sync("./src/*/**");
-  console.log(spritesheets);
+  const spritesheets = glob.sync("./src/*/*/spritesheets/*");
 
-  const seq = spritesheets.map(sprite => {
-    let sprite = ;
-
-    gulp.task(`Spritesheet ${sprite}`, () => {
+  const seq = spritesheets.map(dir => {
+    let aDir = dir.split('/');
+    let spriteName = aDir.pop();
+    let rootFolder = aDir.join('/');
+    
+    gulp.task(`Spritesheet ${dir}`, () => {
       return gulp
-      .src(`/src/**/spritesheets/${sprite}/*.{png,jpg,jpeg}`)
+      .src(`${dir}/*.{png,jpg,jpeg}`)
       .pipe($.spritesmith({
-        imgName: `${sprite}.png`,
-        cssName: `${sprite}.scss`
+        imgName: `${spriteName}.png`,
+        cssName: `${spriteName}.scss`
       }))
-      .src(gulp.dest(`${sprite}`));
+      .pipe(gulp.dest(`${rootFolder}`));
     });
 
-    return `Spritesheet ${sprite}`;
+    return `Spritesheet ${dir}`;
   });
 
   return $.sequence(...seq, done);
