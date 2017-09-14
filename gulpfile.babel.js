@@ -117,7 +117,8 @@ gulp.task("size", done => {
     done();
   }
 
-  let banners = glob.sync("./dist/*/*");
+  const banners = glob.sync("./dist/*/*");
+
   const seq = banners.map(dir => {
     let aDir = dir.split("/");
     aDir.splice(0, 2);
@@ -133,7 +134,6 @@ gulp.task("size", done => {
 
     return `Size of ${name}`;
   });
-
   return $.sequence(...seq, done);
 });
 
