@@ -140,6 +140,29 @@ gulp.task("size", done => {
   return $.sequence(...seq, done);
 });
 
+gulp.task("spritesheet", done => {
+  const spritesheets = glob.sync("./src/*/**");
+  console.log(spritesheets);
+
+  const seq = spritesheets.map(sprite => {
+    let sprite = ;
+
+    gulp.task(`Spritesheet ${sprite}`, () => {
+      return gulp
+      .src(`/src/**/spritesheets/${sprite}/*.{png,jpg,jpeg}`)
+      .pipe($.spritesmith({
+        imgName: `${sprite}.png`,
+        cssName: `${sprite}.scss`
+      }))
+      .src(gulp.dest(`${sprite}`));
+    });
+
+    return `Spritesheet ${sprite}`;
+  });
+
+  return $.sequence(...seq, done);
+});
+
 gulp.task("inline", done => {
   if (PRODUCTION) {
     return gulp
