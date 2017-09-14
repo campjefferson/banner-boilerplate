@@ -30,6 +30,16 @@ const getSizeFromFileName = file => {
   return { w: parseInt(aSizeStr[0]), h: parseInt(aSizeStr[1]) };
 };
 
+const getLocaleFromFileName = (file, defaultLocale = "en") => {
+  let loc = defaultLocale;
+  locales.forEach(locale => {
+    if (file.path.indexOf(`/${locale}/`) >= 0) {
+      loc = locale;
+    }
+  });
+  return loc;
+};
+
 gulp.task("css", done => {
   let sassVars = {};
   let sassHeader;
@@ -93,13 +103,7 @@ gulp.task("handlebars", ["js", "css"], () => {
     .src("./src/**/*.hbs")
     .pipe(
       $.tap((file, t) => {
-        let currentLocale = "en";
-        locales.forEach(locale => {
-          if (file.path.indexOf(`/${locale}/`) >= 0) {
-            currentLocale = locale;
-          }
-        });
-        templateLocals.currentLocale = currentLocale;
+        templateLocals.currentLocale = getLocaleFromFileName(file);
         templateLocals.size = getSizeFromFileName(file);
       })
     )
@@ -116,7 +120,6 @@ gulp.task("size", done => {
   if (!PRODUCTION) {
     done();
   }
-
   const banners = glob.sync("./dist/*/*");
 
   const seq = banners.map(dir => {
