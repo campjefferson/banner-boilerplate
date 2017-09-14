@@ -1,0 +1,13 @@
+@import "variables";
+@import "mixins";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.frame {
+  width: pixels($bannerWidth);
+  height: pixels($bannerHeight);
+  border: 1px solid black;
+}

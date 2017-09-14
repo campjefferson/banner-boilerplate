@@ -4,17 +4,17 @@
   "description": "New CJ Banner Creation Boilerplate",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "dev": "gulp",
+    "production": "gulp --production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/campjefferson/banner-boilerplate.git"
   },
-  "keywords": [
-    "html5",
-    "banner"
-  ],
-  "author": "Anthony Sapp <anthony.sapp@campjefferson.com>, Peerum You <peerum.you@campjefferson.com>",
+  "keywords": ["html5", "banner"],
+  "author":
+    "Anthony Sapp <anthony.sapp@campjefferson.com>, Peerum You <peerum.you@campjefferson.com>",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/campjefferson/banner-boilerplate/issues"
@@ -34,11 +34,15 @@
     "gulp": "^3.9.1",
     "gulp-compile-handlebars": "^0.6.1",
     "gulp-cssnano": "^2.1.2",
+    "gulp-header": "^1.8.9",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.2",
     "gulp-inline-source": "^3.1.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
+    "gulp-sass-variables": "^1.1.1",
+    "gulp-sequence": "^0.4.6",
     "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-tap": "^1.0.1",
@@ -49,6 +53,7 @@
   },
   "dependencies": {
     "animejs": "^2.0.2",
+    "del": "^3.0.0",
     "gsap": "^1.20.2"
   }
 }

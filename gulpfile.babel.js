@@ -1,4 +1,5 @@
 import path from "path";
+import del from "del";
 import fs from "fs-extra";
 import glob from "glob";
 import gulp from "gulp";
@@ -22,9 +23,27 @@ locales.forEach(locale => {
   templateLocals.locales[locale] = fs.readJsonSync(`./_locales/${locale}.json`);
 });
 
+const getSizeFromFileName = file => {
+  const filePath = path.relative(__dirname, file.path);
+  const sizeStr = filePath.split("/")[2];
+  const aSizeStr = sizeStr.split("x");
+  return { w: parseInt(aSizeStr[0]), h: parseInt(aSizeStr[1]) };
+};
+
 gulp.task("css", done => {
+  let sassVars = {};
+  let sassHeader;
+
   return gulp
     .src("./src/**/*.scss")
+    .pipe(
+      $.tap((file, t) => {
+        const size = getSizeFromFileName(file);
+        sassVars.$bannerWidth = size.w;
+        sassVars.$bannerHeight = size.h;
+      })
+    )
+    .pipe($.sassVariables(sassVars))
     .pipe($.if(!PRODUCTION, $.sourcemaps.init()))
     .pipe(
       $.sass({ includePaths: [path.resolve(__dirname, "./_common/css")] }).on(
@@ -81,6 +100,7 @@ gulp.task("handlebars", ["js", "css"], () => {
           }
         });
         templateLocals.currentLocale = currentLocale;
+        templateLocals.size = getSizeFromFileName(file);
       })
     )
     .pipe($.compileHandlebars(templateLocals, options))
@@ -92,26 +112,64 @@ gulp.task("handlebars", ["js", "css"], () => {
     .pipe(gulp.dest("dist"));
 });
 
-gulp.task("size", () => {
-  let banners = glob.sync("./dist/*/*");
+gulp.task("size", done => {
+  if (!PRODUCTION) {
+    done();
+  }
 
-  return banners.forEach(dir => {
-    const name = dir.split("/").pop();
-    return gulp
-      .src(`${dir}/*.{html,js,css}`)
-      .pipe($.size({ title: `${name}:: gzipped size`, gzip: true }))
-      .pipe($.size({ title: `${name}:: size` }))
-      .pipe(gulp.dest("dist"));
+  let banners = glob.sync("./dist/*/*");
+  const seq = banners.map(dir => {
+    let aDir = dir.split("/");
+    aDir.splice(0, 2);
+    const name = aDir.join("/");
+    // create size task
+    gulp.task(`Size of ${name}`, () => {
+      return gulp
+        .src([`${dir}/*.html`, `${dir}/img/*.{png,jpg,jpeg,gif,svg}}`])
+        .pipe($.size({ title: `Banner ${name} - gzipped size -`, gzip: true }))
+        .pipe($.size({ title: `Banner ${name} - size -` }))
+        .pipe(gulp.dest(`${dir}`));
+    });
+
+    return `Size of ${name}`;
   });
+
+  return $.sequence(...seq, done);
 });
 
-gulp.task("default", ["handlebars"], function(done) {
+gulp.task("inline", done => {
   if (PRODUCTION) {
     return gulp
       .src("./dist/**/*.html")
       .pipe($.inlineSource())
+      .pipe($.htmlmin({ collapseWhitespace: true }))
       .pipe(gulp.dest("dist"));
   } else {
-    return done();
+    done();
   }
+});
+
+gulp.task("clean", done => {
+  del.sync("./dist");
+  done();
+});
+
+gulp.task("prune", done => {
+  if (PRODUCTION) {
+    del.sync("./dist/**/*.{js,css,map}");
+    done();
+  } else {
+    done();
+  }
+});
+
+gulp.task("default", done => {
+  if (PRODUCTION) {
+    return $.sequence("clean", "handlebars", "inline", "prune", "size", done);
+  }
+  return $.sequence("clean", "handlebars", "watch", done);
+});
+
+gulp.task("watch", done => {
+  done();
 });
