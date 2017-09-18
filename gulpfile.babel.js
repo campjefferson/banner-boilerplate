@@ -13,6 +13,9 @@ const $ = require("gulp-load-plugins")();
 // dev / production
 const PRODUCTION = argv.production === true;
 
+// flags
+const RETINA_ONLY = argv.retinaonly === true;
+
 // external variables
 const pkg = require("./package.json");
 const config = require("./config.json");
@@ -147,16 +150,27 @@ gulp.task("spritesheet", done => {
     let aDir = dir.split('/');
     let spriteName = aDir.pop();
     let rootFolder = aDir.join('/');
+
+    let spritesmithFilter = "*.{png,jpg,jpeg}";
+    let spritesmithOptions = {
+      retinaSrcFilter: `${dir}/*@2x.{png,jpg,jpeg}`,
+      retinaImgName: `${spriteName}@2x.png`,
+      imgName: `${spriteName}.png`,
+      cssName: `${spriteName}.scss`
+    };
+    
+    if (RETINA_ONLY) {
+      spritesmithFilter = "*@2x.{png,jpg,jpeg}";
+      spritesmithOptions = {
+        imgName: `${spriteName}@2x.png`,
+        cssName: `${spriteName}.scss`
+      };
+    }
     
     gulp.task(`Spritesheet ${dir}`, () => {
       return gulp
-      .src(`${dir}/*.{png,jpg,jpeg}`)
-      .pipe($.spritesmith({
-        retinaSrcFilter: `${dir}/*@2x.{png,jpg,jpeg}`,
-        retinaImgName: `${spriteName}@2x.png`,
-        imgName: `${spriteName}.png`,
-        cssName: `${spriteName}.scss`
-      }))
+      .src(`${dir}/${spritesmithFilter}`)
+      .pipe($.spritesmith(spritesmithOptions))
       .pipe(gulp.dest(`${rootFolder}`));
     });
 
