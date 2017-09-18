@@ -152,6 +152,8 @@ gulp.task("spritesheet", done => {
       return gulp
       .src(`${dir}/*.{png,jpg,jpeg}`)
       .pipe($.spritesmith({
+        retinaSrcFilter: `${dir}/*@2x.{png,jpg,jpeg}`,
+        retinaImgName: `${spriteName}@2x.png`,
         imgName: `${spriteName}.png`,
         cssName: `${spriteName}.scss`
       }))

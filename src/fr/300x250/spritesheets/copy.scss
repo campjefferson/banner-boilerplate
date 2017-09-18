@@ -9,99 +9,189 @@
 //
 // At the bottom of this section, we provide information about the spritesheet itself
 // $spritesheet: width height image $spritesheet-sprites;
-$copy-name: 'copy';
-$copy-x: 0px;
-$copy-y: 0px;
-$copy-offset-x: 0px;
-$copy-offset-y: 0px;
-$copy-width: 1800px;
-$copy-height: 1500px;
-$copy-total-width: 2400px;
-$copy-total-height: 2000px;
-$copy-image: 'copy.png';
-$copy: (0px, 0px, 0px, 0px, 1800px, 1500px, 2400px, 2000px, 'copy.png', 'copy', );
 $copy4a-name: 'copy4a';
-$copy4a-x: 1800px;
+$copy4a-x: 0px;
 $copy4a-y: 0px;
-$copy4a-offset-x: -1800px;
+$copy4a-offset-x: 0px;
 $copy4a-offset-y: 0px;
-$copy4a-width: 600px;
-$copy4a-height: 500px;
-$copy4a-total-width: 2400px;
-$copy4a-total-height: 2000px;
+$copy4a-width: 300px;
+$copy4a-height: 250px;
+$copy4a-total-width: 900px;
+$copy4a-total-height: 750px;
 $copy4a-image: 'copy.png';
-$copy4a: (1800px, 0px, -1800px, 0px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4a', );
+$copy4a: (0px, 0px, 0px, 0px, 300px, 250px, 900px, 750px, 'copy.png', 'copy4a', );
 $copy4b-name: 'copy4b';
-$copy4b-x: 1800px;
-$copy4b-y: 500px;
-$copy4b-offset-x: -1800px;
-$copy4b-offset-y: -500px;
-$copy4b-width: 600px;
-$copy4b-height: 500px;
-$copy4b-total-width: 2400px;
-$copy4b-total-height: 2000px;
+$copy4b-x: 300px;
+$copy4b-y: 0px;
+$copy4b-offset-x: -300px;
+$copy4b-offset-y: 0px;
+$copy4b-width: 300px;
+$copy4b-height: 250px;
+$copy4b-total-width: 900px;
+$copy4b-total-height: 750px;
 $copy4b-image: 'copy.png';
-$copy4b: (1800px, 500px, -1800px, -500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4b', );
+$copy4b: (300px, 0px, -300px, 0px, 300px, 250px, 900px, 750px, 'copy.png', 'copy4b', );
 $copy4c-name: 'copy4c';
-$copy4c-x: 1800px;
-$copy4c-y: 1000px;
-$copy4c-offset-x: -1800px;
-$copy4c-offset-y: -1000px;
-$copy4c-width: 600px;
-$copy4c-height: 500px;
-$copy4c-total-width: 2400px;
-$copy4c-total-height: 2000px;
+$copy4c-x: 0px;
+$copy4c-y: 250px;
+$copy4c-offset-x: 0px;
+$copy4c-offset-y: -250px;
+$copy4c-width: 300px;
+$copy4c-height: 250px;
+$copy4c-total-width: 900px;
+$copy4c-total-height: 750px;
 $copy4c-image: 'copy.png';
-$copy4c: (1800px, 1000px, -1800px, -1000px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4c', );
+$copy4c: (0px, 250px, 0px, -250px, 300px, 250px, 900px, 750px, 'copy.png', 'copy4c', );
 $copy4d-name: 'copy4d';
-$copy4d-x: 0px;
-$copy4d-y: 1500px;
-$copy4d-offset-x: 0px;
-$copy4d-offset-y: -1500px;
-$copy4d-width: 600px;
-$copy4d-height: 500px;
-$copy4d-total-width: 2400px;
-$copy4d-total-height: 2000px;
+$copy4d-x: 300px;
+$copy4d-y: 250px;
+$copy4d-offset-x: -300px;
+$copy4d-offset-y: -250px;
+$copy4d-width: 300px;
+$copy4d-height: 250px;
+$copy4d-total-width: 900px;
+$copy4d-total-height: 750px;
 $copy4d-image: 'copy.png';
-$copy4d: (0px, 1500px, 0px, -1500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4d', );
+$copy4d: (300px, 250px, -300px, -250px, 300px, 250px, 900px, 750px, 'copy.png', 'copy4d', );
 $copy4e-name: 'copy4e';
 $copy4e-x: 600px;
-$copy4e-y: 1500px;
+$copy4e-y: 0px;
 $copy4e-offset-x: -600px;
-$copy4e-offset-y: -1500px;
-$copy4e-width: 600px;
-$copy4e-height: 500px;
-$copy4e-total-width: 2400px;
-$copy4e-total-height: 2000px;
+$copy4e-offset-y: 0px;
+$copy4e-width: 300px;
+$copy4e-height: 250px;
+$copy4e-total-width: 900px;
+$copy4e-total-height: 750px;
 $copy4e-image: 'copy.png';
-$copy4e: (600px, 1500px, -600px, -1500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4e', );
+$copy4e: (600px, 0px, -600px, 0px, 300px, 250px, 900px, 750px, 'copy.png', 'copy4e', );
 $copy4f-name: 'copy4f';
-$copy4f-x: 1200px;
-$copy4f-y: 1500px;
-$copy4f-offset-x: -1200px;
-$copy4f-offset-y: -1500px;
-$copy4f-width: 600px;
-$copy4f-height: 500px;
-$copy4f-total-width: 2400px;
-$copy4f-total-height: 2000px;
+$copy4f-x: 600px;
+$copy4f-y: 250px;
+$copy4f-offset-x: -600px;
+$copy4f-offset-y: -250px;
+$copy4f-width: 300px;
+$copy4f-height: 250px;
+$copy4f-total-width: 900px;
+$copy4f-total-height: 750px;
 $copy4f-image: 'copy.png';
-$copy4f: (1200px, 1500px, -1200px, -1500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'copy4f', );
+$copy4f: (600px, 250px, -600px, -250px, 300px, 250px, 900px, 750px, 'copy.png', 'copy4f', );
 $logo-name: 'logo';
-$logo-x: 1800px;
-$logo-y: 1500px;
-$logo-offset-x: -1800px;
-$logo-offset-y: -1500px;
-$logo-width: 600px;
-$logo-height: 500px;
-$logo-total-width: 2400px;
-$logo-total-height: 2000px;
+$logo-x: 0px;
+$logo-y: 500px;
+$logo-offset-x: 0px;
+$logo-offset-y: -500px;
+$logo-width: 300px;
+$logo-height: 250px;
+$logo-total-width: 900px;
+$logo-total-height: 750px;
 $logo-image: 'copy.png';
-$logo: (1800px, 1500px, -1800px, -1500px, 600px, 500px, 2400px, 2000px, 'copy.png', 'logo', );
-$spritesheet-width: 2400px;
-$spritesheet-height: 2000px;
+$logo: (0px, 500px, 0px, -500px, 300px, 250px, 900px, 750px, 'copy.png', 'logo', );
+$copy4a-2x-name: 'copy4a@2x';
+$copy4a-2x-x: 0px;
+$copy4a-2x-y: 0px;
+$copy4a-2x-offset-x: 0px;
+$copy4a-2x-offset-y: 0px;
+$copy4a-2x-width: 600px;
+$copy4a-2x-height: 500px;
+$copy4a-2x-total-width: 1800px;
+$copy4a-2x-total-height: 1500px;
+$copy4a-2x-image: 'copy@2x.png';
+$copy4a-2x: (0px, 0px, 0px, 0px, 600px, 500px, 1800px, 1500px, 'copy@2x.png', 'copy4a@2x', );
+$copy4b-2x-name: 'copy4b@2x';
+$copy4b-2x-x: 600px;
+$copy4b-2x-y: 0px;
+$copy4b-2x-offset-x: -600px;
+$copy4b-2x-offset-y: 0px;
+$copy4b-2x-width: 600px;
+$copy4b-2x-height: 500px;
+$copy4b-2x-total-width: 1800px;
+$copy4b-2x-total-height: 1500px;
+$copy4b-2x-image: 'copy@2x.png';
+$copy4b-2x: (600px, 0px, -600px, 0px, 600px, 500px, 1800px, 1500px, 'copy@2x.png', 'copy4b@2x', );
+$copy4c-2x-name: 'copy4c@2x';
+$copy4c-2x-x: 0px;
+$copy4c-2x-y: 500px;
+$copy4c-2x-offset-x: 0px;
+$copy4c-2x-offset-y: -500px;
+$copy4c-2x-width: 600px;
+$copy4c-2x-height: 500px;
+$copy4c-2x-total-width: 1800px;
+$copy4c-2x-total-height: 1500px;
+$copy4c-2x-image: 'copy@2x.png';
+$copy4c-2x: (0px, 500px, 0px, -500px, 600px, 500px, 1800px, 1500px, 'copy@2x.png', 'copy4c@2x', );
+$copy4d-2x-name: 'copy4d@2x';
+$copy4d-2x-x: 600px;
+$copy4d-2x-y: 500px;
+$copy4d-2x-offset-x: -600px;
+$copy4d-2x-offset-y: -500px;
+$copy4d-2x-width: 600px;
+$copy4d-2x-height: 500px;
+$copy4d-2x-total-width: 1800px;
+$copy4d-2x-total-height: 1500px;
+$copy4d-2x-image: 'copy@2x.png';
+$copy4d-2x: (600px, 500px, -600px, -500px, 600px, 500px, 1800px, 1500px, 'copy@2x.png', 'copy4d@2x', );
+$copy4e-2x-name: 'copy4e@2x';
+$copy4e-2x-x: 1200px;
+$copy4e-2x-y: 0px;
+$copy4e-2x-offset-x: -1200px;
+$copy4e-2x-offset-y: 0px;
+$copy4e-2x-width: 600px;
+$copy4e-2x-height: 500px;
+$copy4e-2x-total-width: 1800px;
+$copy4e-2x-total-height: 1500px;
+$copy4e-2x-image: 'copy@2x.png';
+$copy4e-2x: (1200px, 0px, -1200px, 0px, 600px, 500px, 1800px, 1500px, 'copy@2x.png', 'copy4e@2x', );
+$copy4f-2x-name: 'copy4f@2x';
+$copy4f-2x-x: 1200px;
+$copy4f-2x-y: 500px;
+$copy4f-2x-offset-x: -1200px;
+$copy4f-2x-offset-y: -500px;
+$copy4f-2x-width: 600px;
+$copy4f-2x-height: 500px;
+$copy4f-2x-total-width: 1800px;
+$copy4f-2x-total-height: 1500px;
+$copy4f-2x-image: 'copy@2x.png';
+$copy4f-2x: (1200px, 500px, -1200px, -500px, 600px, 500px, 1800px, 1500px, 'copy@2x.png', 'copy4f@2x', );
+$logo-2x-name: 'logo@2x';
+$logo-2x-x: 0px;
+$logo-2x-y: 1000px;
+$logo-2x-offset-x: 0px;
+$logo-2x-offset-y: -1000px;
+$logo-2x-width: 600px;
+$logo-2x-height: 500px;
+$logo-2x-total-width: 1800px;
+$logo-2x-total-height: 1500px;
+$logo-2x-image: 'copy@2x.png';
+$logo-2x: (0px, 1000px, 0px, -1000px, 600px, 500px, 1800px, 1500px, 'copy@2x.png', 'logo@2x', );
+$spritesheet-width: 900px;
+$spritesheet-height: 750px;
 $spritesheet-image: 'copy.png';
-$spritesheet-sprites: ($copy, $copy4a, $copy4b, $copy4c, $copy4d, $copy4e, $copy4f, $logo, );
-$spritesheet: (2400px, 2000px, 'copy.png', $spritesheet-sprites, );
+$spritesheet-sprites: ($copy4a, $copy4b, $copy4c, $copy4d, $copy4e, $copy4f, $logo, );
+$spritesheet: (900px, 750px, 'copy.png', $spritesheet-sprites, );
+$retina-spritesheet-width: 1800px;
+$retina-spritesheet-height: 1500px;
+$retina-spritesheet-image: 'copy@2x.png';
+$retina-spritesheet-sprites: ($copy4a-2x, $copy4b-2x, $copy4c-2x, $copy4d-2x, $copy4e-2x, $copy4f-2x, $logo-2x, );
+$retina-spritesheet: (1800px, 1500px, 'copy@2x.png', $retina-spritesheet-sprites, );
+
+// These "retina group" variables are mappings for the naming and pairing of normal and retina sprites.
+//
+// The list formatted variables are intended for mixins like `retina-sprite` and `retina-sprites`.
+$copy4a-group-name: 'copy4a';
+$copy4a-group: ('copy4a', $copy4a, $copy4a-2x, );
+$copy4b-group-name: 'copy4b';
+$copy4b-group: ('copy4b', $copy4b, $copy4b-2x, );
+$copy4c-group-name: 'copy4c';
+$copy4c-group: ('copy4c', $copy4c, $copy4c-2x, );
+$copy4d-group-name: 'copy4d';
+$copy4d-group: ('copy4d', $copy4d, $copy4d-2x, );
+$copy4e-group-name: 'copy4e';
+$copy4e-group: ('copy4e', $copy4e, $copy4e-2x, );
+$copy4f-group-name: 'copy4f';
+$copy4f-group: ('copy4f', $copy4f, $copy4f-2x, );
+$logo-group-name: 'logo';
+$logo-group: ('logo', $logo, $logo-2x, );
+$retina-groups: ($copy4a-group, $copy4b-group, $copy4c-group, $copy4d-group, $copy4e-group, $copy4f-group, $logo-group, );
 
 // The provided mixins are intended to be used with the array-like variables
 //
@@ -153,6 +243,34 @@ $spritesheet: (2400px, 2000px, 'copy.png', $spritesheet-sprites, );
   @include sprite-height($sprite);
 }
 
+// The `retina-sprite` mixin sets up rules and a media query for a sprite/retina sprite.
+//   It should be used with a "retina group" variable.
+//
+// The media query is from CSS Tricks: https://css-tricks.com/snippets/css/retina-display-media-query/
+//
+// $icon-home-group: ('icon-home', $icon-home, $icon-home-2x, );
+//
+// .icon-home {
+//   @include retina-sprite($icon-home-group);
+// }
+@mixin sprite-background-size($sprite) {
+  $sprite-total-width: nth($sprite, 7);
+  $sprite-total-height: nth($sprite, 8);
+  background-size: $sprite-total-width $sprite-total-height;
+}
+
+@mixin retina-sprite($retina-group) {
+  $normal-sprite: nth($retina-group, 2);
+  $retina-sprite: nth($retina-group, 3);
+  @include sprite($normal-sprite);
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+         (min-resolution: 192dpi) {
+    @include sprite-image($retina-sprite);
+    @include sprite-background-size($normal-sprite);
+  }
+}
+
 // The `sprites` mixin generates identical output to the CSS template
 //   but can be overridden inside of SCSS
 //
@@ -162,6 +280,19 @@ $spritesheet: (2400px, 2000px, 'copy.png', $spritesheet-sprites, );
     $sprite-name: nth($sprite, 10);
     .#{$sprite-name} {
       @include sprite($sprite);
+    }
+  }
+}
+
+// The `retina-sprites` mixin generates a CSS rule and media query for retina groups
+//   This yields the same output as CSS retina template but can be overridden in SCSS
+//
+// @include retina-sprites($retina-groups);
+@mixin retina-sprites($retina-groups) {
+  @each $retina-group in $retina-groups {
+    $sprite-name: nth($retina-group, 1);
+    .#{$sprite-name} {
+      @include retina-sprite($retina-group);
     }
   }
 }
