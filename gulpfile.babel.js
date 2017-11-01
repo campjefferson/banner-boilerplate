@@ -3,8 +3,10 @@ import del from "del";
 import fs from "fs-extra";
 import glob from "glob";
 import gulp from "gulp";
-const argv = require("yargs").argv;
 
+const browserSync = require("browser-sync").create();
+
+const argv = require("yargs").argv;
 import * as helpers from "./_helpers";
 
 // all gulp plugins accessed via $.pluginNameCamelized
@@ -62,7 +64,8 @@ gulp.task("css", done => {
       )
     )
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
-    .pipe(gulp.dest("./dist"));
+    .pipe(gulp.dest("./dist"))
+    .pipe($.if(!PRODUCTION, browserSync.stream()));
 });
 
 gulp.task("js", done => {
@@ -92,7 +95,7 @@ gulp.task("js", done => {
     .pipe(gulp.dest("dist"));
 });
 
-gulp.task("handlebars", ["js", "css"], () => {
+gulp.task("handlebars", () => {
   const options = {
     ignorePartials: true,
     helpers,
@@ -114,6 +117,21 @@ gulp.task("handlebars", ["js", "css"], () => {
       })
     )
     .pipe(gulp.dest("dist"));
+});
+
+gulp.task("handlebars-watch", ["handlebars"], done => {
+  browserSync.reload();
+  done();
+});
+
+gulp.task("js-watch", ["js"], done => {
+  browserSync.reload();
+  done();
+});
+
+gulp.task("img-watch", done => {
+  browserSync.reload();
+  done();
 });
 
 gulp.task("size", done => {
@@ -166,13 +184,52 @@ gulp.task("prune", done => {
   }
 });
 
+gulp.task("backups", done => {
+  let filepath;
+  return gulp
+    .src(`./src/*/*/*.png`)
+    .pipe(
+      $.gm(function(gmfile) {
+        return gmfile.setFormat("gif");
+      })
+    )
+    .pipe(gulp.dest(`./dist`));
+});
+
 gulp.task("default", done => {
   if (PRODUCTION) {
-    return $.sequence("clean", "handlebars", "inline", "prune", "size", done);
+    return $.sequence(
+      "clean",
+      ["js", "css"],
+      "handlebars",
+      "inline",
+      "backups",
+      "prune",
+      "size",
+      done
+    );
   }
-  return $.sequence("clean", "handlebars", "watch", done);
+  return $.sequence(
+    "clean",
+    ["js", "css"],
+    "handlebars",
+    "server",
+    "watch",
+    done
+  );
+});
+
+gulp.task("server", function() {
+  browserSync.init({
+    server: {
+      baseDir: "./dist"
+    }
+  });
 });
 
 gulp.task("watch", done => {
-  done();
+  gulp.watch(["./src/**/*.scss"], ["css"]);
+  gulp.watch(["./src/**/*.js"], ["js-watch"]);
+  gulp.watch(["./src/**/*.{jpg,png,gif,svg}"], ["img-watch"]);
+  gulp.watch(["./src/**/*.{hbs,html}"], ["handlebars-watch"]);
 });
