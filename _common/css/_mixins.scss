@@ -1,3 +1,36 @@
 @function pixels ($num) {
   @return $num+px;
 }
+
+// Quickly set the x, y position of an ad-element
+@mixin position($x:0, $y:0) {
+  @if $x == "center" {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else {
+    left: $x + 0px;
+  }
+
+  @if $y == "center" {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else {
+    top: $y + 0px;
+  }
+}
+
+// Set the width, height of an ad-element
+@mixin size($width:0, $height:0) {
+  width: $width + 0px;
+  height: $height + 0px;
+}
+
+// Detect retina displays
+@mixin retina {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+    only screen and (-moz-min-device-pixel-ratio: 1.5),
+    only screen and (-o-min-device-pixel-ratio: 3/2),
+    only screen and (min-device-pixel-ratio: 1.5) {
+    @content;
+  }
+}

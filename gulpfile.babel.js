@@ -3,8 +3,10 @@ import del from "del";
 import fs from "fs-extra";
 import glob from "glob";
 import gulp from "gulp";
-
+import _ from "lodash";
+const merge = require("merge-stream");
 const browserSync = require("browser-sync").create();
+const uuid = require("uuid/v1");
 
 const argv = require("yargs").argv;
 import * as helpers from "./_helpers";
@@ -14,6 +16,9 @@ const $ = require("gulp-load-plugins")();
 
 // dev / production
 const PRODUCTION = argv.production === true;
+
+// flags
+const RETINA_ONLY = argv.retinaonly === true;
 
 // external variables
 const pkg = require("./package.json");
@@ -47,7 +52,7 @@ gulp.task("css", done => {
   let sassHeader;
 
   return gulp
-    .src("./src/**/*.scss")
+    .src("./src/**/banner.scss")
     .pipe(
       $.tap((file, t) => {
         const size = getSizeFromFileName(file);
@@ -95,6 +100,10 @@ gulp.task("js", done => {
     .pipe(gulp.dest("dist"));
 });
 
+gulp.task("assets", () => {
+  return gulp.src("./src/*/*/*.{jpg,png,gif,svg}").pipe(gulp.dest("./dist"));
+});
+
 gulp.task("handlebars", () => {
   const options = {
     ignorePartials: true,
@@ -119,21 +128,6 @@ gulp.task("handlebars", () => {
     .pipe(gulp.dest("dist"));
 });
 
-gulp.task("handlebars-watch", ["handlebars"], done => {
-  browserSync.reload();
-  done();
-});
-
-gulp.task("js-watch", ["js"], done => {
-  browserSync.reload();
-  done();
-});
-
-gulp.task("img-watch", done => {
-  browserSync.reload();
-  done();
-});
-
 gulp.task("size", done => {
   if (!PRODUCTION) {
     done();
@@ -155,7 +149,78 @@ gulp.task("size", done => {
 
     return `Size of ${name}`;
   });
-  return $.sequence(...seq, done);
+  return gulp.series(...seq)(done);
+});
+
+gulp.task("spritesheet", done => {
+  const spritesheets = glob.sync("./src/*/*/spritesheets/*");
+
+  const seq = spritesheets.map(dir => {
+    let aDir = dir.split("/");
+    let spriteName = aDir.pop();
+    let rootFolder = aDir.join("/");
+
+    let spritesmithFilter = "*.{png,jpg,jpeg}";
+    let spritesmithOptions = {
+      retinaSrcFilter: `${dir}/*@2x.{png,jpg,jpeg}`,
+      retinaImgName: `${spriteName}@2x.png`,
+      imgName: `${spriteName}.png`,
+      cssName: `${spriteName}.scss`
+    };
+
+    if (RETINA_ONLY) {
+      spritesmithFilter = "*@2x.{png,jpg,jpeg}";
+      spritesmithOptions = {
+        imgName: `${spriteName}@2x.png`,
+        cssName: `${spriteName}.scss`
+      };
+    }
+
+    const task = gulp
+      .src(`${dir}/${spritesmithFilter}`)
+      .pipe($.spritesmith(spritesmithOptions));
+
+    return {
+      imgStream: task.img.pipe(gulp.dest(rootFolder)),
+      cssStream: task.css,
+      rootFolder
+    };
+  });
+
+  const listsObj = _.groupBy(seq, "rootFolder");
+  let lists = [];
+
+  _.each(listsObj, list => {
+    lists.push(list);
+  });
+
+  const endSeq = lists.map((dirList, index) => {
+    const taskName = `sprite-${index}`;
+    const rootDir = dirList[0].rootFolder;
+    let imgStreams = [];
+    let cssStreams = [];
+    dirList.map(streamList => {
+      imgStreams.push(streamList.imgStream);
+      cssStreams.push(streamList.cssStream);
+    });
+
+    const cssStream = () =>
+      merge(...cssStreams)
+        .pipe(
+          $.appendPrepend.appendText("@include retina-sprites($retina-groups);")
+        )
+        .pipe($.concat("sprites.scss"))
+        .pipe(gulp.dest(rootDir));
+
+    gulp.task(
+      taskName,
+      gulp.parallel(cssStream, ...imgStreams.map(stream => () => stream))
+    );
+
+    return taskName;
+  });
+
+  return gulp.parallel(...endSeq)(done);
 });
 
 gulp.task("inline", done => {
@@ -198,38 +263,54 @@ gulp.task("backups", done => {
 
 gulp.task("default", done => {
   if (PRODUCTION) {
-    return $.sequence(
+    return gulp.series(
       "clean",
-      ["js", "css"],
+      "spritesheet",
+      gulp.parallel("js", "css", "assets"),
       "handlebars",
       "inline",
       "backups",
       "prune",
-      "size",
-      done
-    );
+      "size"
+    )(done);
   }
-  return $.sequence(
+  return gulp.series(
     "clean",
-    ["js", "css"],
+    "spritesheet",
+    gulp.parallel("js", "css", "assets"),
     "handlebars",
     "server",
-    "watch",
-    done
-  );
+    "watch"
+  )(done);
 });
 
-gulp.task("server", function() {
+gulp.task("server", done => {
   browserSync.init({
     server: {
       baseDir: "./dist"
     }
   });
+  done();
+});
+
+gulp.task("reload", done => {
+  browserSync.reload();
+  done();
 });
 
 gulp.task("watch", done => {
-  gulp.watch(["./src/**/*.scss"], ["css"]);
-  gulp.watch(["./src/**/*.js"], ["js-watch"]);
-  gulp.watch(["./src/**/*.{jpg,png,gif,svg}"], ["img-watch"]);
-  gulp.watch(["./src/**/*.{hbs,html}"], ["handlebars-watch"]);
+  gulp.watch(["./src/**/*.scss"], gulp.series("css"));
+  gulp.watch(["./src/**/*.js"], gulp.series("js", "reload"));
+  gulp.watch(
+    ["./src/**/spritesheets/**/*.{jpg,png,gif,svg}"],
+    gulp.series("spritesheet")
+  );
+  gulp.watch(
+    [
+      "./src/**/*.{jpg,png,gif,svg}",
+      "!./src/**/spritesheets/**/*.{jpg,png,gif,svg}"
+    ],
+    gulp.series("assets", "reload")
+  );
+  gulp.watch(["./src/**/*.{hbs,html}"], gulp.series("handlebars", "reload"));
 });
