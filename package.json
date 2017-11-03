@@ -7,17 +7,16 @@
     "test": "npm test",
     "start": "gulp",
     "dev": "gulp",
+    "spritesheet": "gulp spritesheet",
     "production": "gulp --production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/campjefferson/banner-boilerplate.git"
   },
-  "keywords": [
-    "html5",
-    "banner"
-  ],
-  "author": "Anthony Sapp <anthony.sapp@campjefferson.com>, Peerum You <peerum.you@campjefferson.com>",
+  "keywords": ["html5", "banner"],
+  "author":
+    "Anthony Sapp <anthony.sapp@campjefferson.com>, Peerum You <peerum.you@campjefferson.com>",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/campjefferson/banner-boilerplate/issues"

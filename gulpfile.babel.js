@@ -18,7 +18,7 @@ const $ = require("gulp-load-plugins")();
 const PRODUCTION = argv.production === true;
 
 // flags
-const RETINA_ONLY = argv.retinaonly === true;
+const MULTI_RES = argv.multires === true;
 
 // external variables
 const pkg = require("./package.json");
@@ -101,7 +101,12 @@ gulp.task("js", done => {
 });
 
 gulp.task("assets", () => {
-  return gulp.src("./src/*/*/*.{jpg,png,gif,svg}").pipe(gulp.dest("./dist"));
+  return gulp
+    .src([
+      "./src/**/img/*.{jpg,png,gif,svg}",
+      "./src/**/img/*/*.{jpg,png,gif,svg}"
+    ])
+    .pipe(gulp.dest("./dist"));
 });
 
 gulp.task("handlebars", () => {
@@ -153,7 +158,7 @@ gulp.task("size", done => {
 });
 
 gulp.task("spritesheet", done => {
-  const spritesheets = glob.sync("./src/*/*/spritesheets/*");
+  const spritesheets = glob.sync("./src/*/*/img/spritesheets/*");
 
   const seq = spritesheets.map(dir => {
     let aDir = dir.split("/");
@@ -162,19 +167,22 @@ gulp.task("spritesheet", done => {
 
     let spritesmithFilter = "*.{png,jpg,jpeg}";
     let spritesmithOptions = {
-      retinaSrcFilter: `${dir}/*@2x.{png,jpg,jpeg}`,
-      retinaImgName: `${spriteName}@2x.png`,
+      functions: true,
+      variableNameTransforms: ["dasherize"],
       imgName: `${spriteName}.png`,
-      cssName: `${spriteName}.scss`
+      cssName: `${spriteName}.scss`,
+      cssTemplate: `./_common/templates/spritesmith.retina.only.template.handlebars`
     };
 
-    if (RETINA_ONLY) {
-      spritesmithFilter = "*@2x.{png,jpg,jpeg}";
+    if (MULTI_RES) {
       spritesmithOptions = {
-        imgName: `${spriteName}@2x.png`,
+        retinaSrcFilter: `${dir}/*@2x.{png,jpg,jpeg}`,
+        retinaImgName: `${spriteName}@2x.png`,
+        imgName: `${spriteName}.png`,
         cssName: `${spriteName}.scss`
       };
     }
+    spritesmithOptions.imgPath = `img/spritesheets/${spritesmithOptions.imgName}`;
 
     const task = gulp
       .src(`${dir}/${spritesmithFilter}`)
@@ -207,10 +215,14 @@ gulp.task("spritesheet", done => {
     const cssStream = () =>
       merge(...cssStreams)
         .pipe(
-          $.appendPrepend.appendText("@include retina-sprites($retina-groups);")
+          $.appendPrepend.appendText(
+            MULTI_RES
+              ? "@include retina-sprites($retina-groups);"
+              : "// nothing"
+          )
         )
         .pipe($.concat("sprites.scss"))
-        .pipe(gulp.dest(rootDir));
+        .pipe(gulp.dest(`${rootDir}`));
 
     gulp.task(
       taskName,
