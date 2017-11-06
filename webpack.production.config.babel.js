@@ -7,5 +7,13 @@ const common = path.resolve(__dirname, "./_common/js/");
 module.exports = {
   context: __dirname,
   devtool: false,
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: "babel-loader"
+      }
+    ]
+  },
   plugins: [new UglifyJSPlugin()]
 };

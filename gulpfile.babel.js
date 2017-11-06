@@ -4,6 +4,7 @@ import fs from "fs-extra";
 import glob from "glob";
 import gulp from "gulp";
 import _ from "lodash";
+const through = require("through2");
 const merge = require("merge-stream");
 const browserSync = require("browser-sync").create();
 const uuid = require("uuid/v1");
@@ -26,6 +27,8 @@ const config = require("./config.json");
 const { locales, global, banners } = config;
 
 let templateLocals = { locales: {} };
+let stagingJson = { banners: {} };
+
 locales.forEach(locale => {
   templateLocals.locales[locale] = fs.readJsonSync(`./_locales/${locale}.json`);
 });
@@ -106,6 +109,7 @@ gulp.task("assets", () => {
       "./src/**/img/*.{jpg,png,gif,svg}",
       "./src/**/img/*/*.{jpg,png,gif,svg}"
     ])
+    .pipe($.if(PRODUCTION, $.image()))
     .pipe(gulp.dest("./dist"));
 });
 
@@ -133,6 +137,42 @@ gulp.task("handlebars", () => {
     .pipe(gulp.dest("dist"));
 });
 
+gulp.task("dev-index", () => {
+  const options = {
+    ignorePartials: true,
+    helpers
+  };
+
+  const banners = glob.sync("./dist/*");
+  const bannerLinks = banners.map(dir => {
+    let aDir = dir.split("/");
+    let lang = aDir[2];
+    let bannerName = aDir[3];
+
+    let bannerDirs = glob.sync(`./dist/${lang}/*`);
+
+    const list = bannerDirs.map(dir => {
+      let aDir = dir.split("/");
+      let bannerName = aDir[3];
+      return { title: bannerName, url: dir.replace("./dist", "") };
+    });
+    return { title: lang, banners: list };
+  });
+
+  return gulp
+    .src("./_common/templates/dev-index.hbs")
+    .pipe(
+      $.tap((file, t) => {
+        templateLocals.locales = config.locales;
+        templateLocals.title = pkg.name;
+        templateLocals.bannerLinks = bannerLinks;
+      })
+    )
+    .pipe($.compileHandlebars(templateLocals, options))
+    .pipe($.rename(`index.html`))
+    .pipe(gulp.dest("dist"));
+});
+
 gulp.task("size", done => {
   if (!PRODUCTION) {
     done();
@@ -141,20 +181,74 @@ gulp.task("size", done => {
 
   const seq = banners.map(dir => {
     let aDir = dir.split("/");
+    let lang = aDir[2];
+    let bannerName = aDir[3];
     aDir.splice(0, 2);
     const name = aDir.join("/");
+
     // create size task
     gulp.task(`Size of ${name}`, () => {
+      const s = $.size({ title: `Banner ${name} - size -` });
+      const sGzip = $.size({
+        title: `Banner ${name} - gzipped size -`,
+        gzip: true
+      });
       return gulp
         .src([`${dir}/*.html`, `${dir}/img/*.{png,jpg,jpeg,gif,svg}}`])
-        .pipe($.size({ title: `Banner ${name} - gzipped size -`, gzip: true }))
-        .pipe($.size({ title: `Banner ${name} - size -` }))
-        .pipe(gulp.dest(`${dir}`));
+        .pipe(s)
+        .pipe(sGzip)
+        .pipe(gulp.dest(`${dir}`))
+        .pipe(
+          through.obj(function(chunk, enc, cb) {
+            stagingJson.banners[lang] = stagingJson.banners[lang] || {};
+
+            stagingJson.banners[lang][bannerName] =
+              stagingJson.banners[lang][bannerName] || {};
+
+            stagingJson.banners[lang][bannerName].sizes = {
+              size: { raw: s.size, pretty: s.prettySize },
+              gzipSize: { raw: sGzip.size, pretty: sGzip.prettySize }
+            };
+            cb(null, chunk);
+          })
+        );
     });
 
     return `Size of ${name}`;
   });
   return gulp.series(...seq)(done);
+});
+
+gulp.task("publish", done => {
+  if (!PRODUCTION) {
+    done();
+  }
+  const gifBanner = config.gifBanner || "en/300x250";
+  const aGifBanner = gifBanner.split("/");
+  fs.copySync(
+    `./dist/${gifBanner}/${aGifBanner[1]}.gif`,
+    `./dist/thumbnail.gif`
+  );
+
+  const now = new Date();
+  stagingJson.lastModified = now;
+
+  _.map(stagingJson.banners.en, (value, prop) => {
+    const aSizes = prop.split("x");
+    stagingJson.banners.en[prop].width = parseInt(aSizes[0]);
+    stagingJson.banners.en[prop].height = parseInt(aSizes[1]);
+  });
+
+  if (stagingJson.banners.fr) {
+    _.map(stagingJson.banners.fr, (value, prop) => {
+      const aSizes = prop.split("x");
+      stagingJson.banners.fr[prop].width = parseInt(aSizes[0]);
+      stagingJson.banners.fr[prop].height = parseInt(aSizes[1]);
+    });
+  }
+
+  fs.writeJSONSync("./dist/staging-template.json", stagingJson);
+  done();
 });
 
 gulp.task("spritesheet", done => {
@@ -283,7 +377,8 @@ gulp.task("default", done => {
       "inline",
       "backups",
       "prune",
-      "size"
+      "size",
+      "publish"
     )(done);
   }
   return gulp.series(
@@ -291,6 +386,7 @@ gulp.task("default", done => {
     "spritesheet",
     gulp.parallel("js", "css", "assets"),
     "handlebars",
+    "dev-index",
     "server",
     "watch"
   )(done);
