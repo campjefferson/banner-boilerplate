@@ -4,6 +4,7 @@ import fs from "fs-extra";
 import glob from "glob";
 import gulp from "gulp";
 import _ from "lodash";
+const webpack = require("webpack-stream");
 const through = require("through2");
 const merge = require("merge-stream");
 const browserSync = require("browser-sync").create();
@@ -99,7 +100,7 @@ gulp.task("js", done => {
 
   return gulp
     .src("./src/*/*")
-    .pipe($.webpack(options))
+    .pipe(webpack(options))
     .pipe(gulp.dest("dist"));
 });
 
