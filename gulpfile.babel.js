@@ -233,6 +233,8 @@ gulp.task("publish", done => {
     `./dist/thumbnail.gif`
   );
 
+  stagingJson.thumbnail = "thumbnail.gif";
+
   const now = new Date();
   stagingJson.lastModified = now;
 
