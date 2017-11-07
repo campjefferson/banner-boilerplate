@@ -4,6 +4,8 @@ import fs from "fs-extra";
 import glob from "glob";
 import gulp from "gulp";
 import _ from "lodash";
+import axios from "axios";
+
 const webpack = require("webpack-stream");
 const through = require("through2");
 const merge = require("merge-stream");
@@ -24,7 +26,7 @@ const MULTI_RES = argv.multires === true;
 
 // external variables
 const pkg = require("./package.json");
-const config = require("./config.json");
+const { config } = pkg;
 const { locales, global, banners } = config;
 
 let templateLocals = { locales: {} };
@@ -421,6 +423,13 @@ gulp.task("zip", done => {
   return gulp.parallel(() => full, ...seq)(done);
 });
 
+gulp.task("call-staging-endpoint", done => {
+  if (!config.stagingEndpoint) {
+    done();
+  }
+  return axios.post(config.stagingEndpoint);
+});
+
 gulp.task("default", done => {
   if (PRODUCTION) {
     return gulp.series(
@@ -433,7 +442,8 @@ gulp.task("default", done => {
       "prune",
       "size",
       "zip",
-      "publish"
+      "publish",
+      "call-staging-endpoint"
     )(done);
   }
   return gulp.series(

@@ -3,6 +3,14 @@
   "version": "0.0.1",
   "description": "New CJ Banner Creation Boilerplate",
   "main": "index.js",
+  "config": {
+    "locales": ["en", "fr"],
+    "global": {
+      "prefix": "Porsche"
+    },
+    "stagingEndpoint":
+      "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c"
+  },
   "scripts": {
     "test": "npm test",
     "start": "gulp",
@@ -14,17 +22,16 @@
     "type": "git",
     "url": "git+https://github.com/campjefferson/banner-boilerplate.git"
   },
-  "keywords": [
-    "html5",
-    "banner"
-  ],
-  "author": "Anthony Sapp <anthony.sapp@campjefferson.com>, Peerum You <peerum.you@campjefferson.com>",
+  "keywords": ["html5", "banner"],
+  "author":
+    "Anthony Sapp <anthony.sapp@campjefferson.com>, Peerum You <peerum.you@campjefferson.com>",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/campjefferson/banner-boilerplate/issues"
   },
   "homepage": "https://github.com/campjefferson/banner-boilerplate#readme",
   "devDependencies": {
+    "axios": "^0.17.0",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
