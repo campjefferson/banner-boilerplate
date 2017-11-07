@@ -234,19 +234,22 @@ gulp.task("publish", done => {
   const now = new Date();
   stagingJson.lastModified = now;
 
-  _.map(stagingJson.banners.en, (value, prop) => {
-    const aSizes = prop.split("x");
-    stagingJson.banners.en[prop].width = parseInt(aSizes[0]);
-    stagingJson.banners.en[prop].height = parseInt(aSizes[1]);
+  let numBanners = 0;
+
+  _.each(stagingJson.banners, (value, lang) => {
+    _.each(stagingJson.banners[lang], (value, prop) => {
+      numBanners++;
+      const aSizes = prop.split("x");
+      stagingJson.banners[lang][prop].name = prop;
+      stagingJson.banners[lang][prop].file = `/${lang}/${prop}/`;
+      stagingJson.banners[lang][prop].url = `/${lang}/${prop}/`;
+      stagingJson.banners[lang][prop].width = parseInt(aSizes[0]);
+      stagingJson.banners[lang][prop].height = parseInt(aSizes[1]);
+    });
   });
 
-  if (stagingJson.banners.fr) {
-    _.map(stagingJson.banners.fr, (value, prop) => {
-      const aSizes = prop.split("x");
-      stagingJson.banners.fr[prop].width = parseInt(aSizes[0]);
-      stagingJson.banners.fr[prop].height = parseInt(aSizes[1]);
-    });
-  }
+  stagingJson.numBanners = numBanners;
+  stagingJson.name = pkg.name;
 
   fs.writeJSONSync("./dist/staging-template.json", stagingJson);
   done();
@@ -368,6 +371,56 @@ gulp.task("backups", done => {
     .pipe(gulp.dest(`./dist`));
 });
 
+gulp.task("zip", done => {
+  const date = new Date();
+  const dateStr = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+
+  const full = gulp
+    .src("./dist/**/*")
+    .pipe($.zip(`${pkg.name}_${dateStr}.zip`))
+    .pipe(gulp.dest("./dist/download"));
+
+  stagingJson.zip = `/download/${pkg.name}_${dateStr}.zip`;
+
+  const banners = glob.sync("./dist/*/*");
+  const seq = banners.map(dir => {
+    let aDir = dir.split("/");
+    let lang = aDir[2];
+    let bannerName = aDir[3];
+    aDir.splice(0, 2);
+    const name = aDir.join("/");
+
+    // create size task
+    gulp.task(`Archive ${name}`, () => {
+      return gulp
+        .src([`${dir}/*`])
+        .pipe(
+          $.zip(
+            `${pkg.name}_${bannerName}_${lang.toUpperCase()}_${dateStr}.zip`
+          )
+        )
+        .pipe(gulp.dest("./dist/download"))
+        .pipe(
+          through.obj(function(chunk, enc, cb) {
+            stagingJson.banners[lang] = stagingJson.banners[lang] || {};
+
+            stagingJson.banners[lang][bannerName] =
+              stagingJson.banners[lang][bannerName] || {};
+
+            stagingJson.banners[lang][
+              bannerName
+            ].zip = `/download/${pkg.name}_${bannerName}_${lang.toUpperCase()}_${dateStr}.zip`;
+            cb(null, chunk);
+          })
+        );
+    });
+
+    return `Archive ${name}`;
+  });
+
+  return gulp.parallel(() => full, ...seq)(done);
+});
+
 gulp.task("default", done => {
   if (PRODUCTION) {
     return gulp.series(
@@ -379,6 +432,7 @@ gulp.task("default", done => {
       "backups",
       "prune",
       "size",
+      "zip",
       "publish"
     )(done);
   }
