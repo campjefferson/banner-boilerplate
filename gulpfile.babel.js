@@ -240,8 +240,11 @@ gulp.task("publish", done => {
   if (!PRODUCTION) {
     done();
   }
-  const gifBanner = config.gifBanner || "en/300x250";
+  const dirs = glob.sync("./dist/*");
+  const first = dirs[0].substr(2).split("/")[1];
+  const gifBanner = config.gifBanner || `${first}/300x250`;
   const aGifBanner = gifBanner.split("/");
+
   fs.copySync(
     `./dist/${gifBanner}/${aGifBanner[1]}.gif`,
     `./dist/thumbnail.gif`
@@ -256,14 +259,23 @@ gulp.task("publish", done => {
 
   _.each(stagingJson.banners, (value, lang) => {
     _.each(stagingJson.banners[lang], (value, prop) => {
-      if (typeof stagingJson.banners[lang][prop] === "string") {
-        return;
-      }
       numBanners++;
       const aSizes = prop.split("x");
+
+      let newName = prop;
+      if (config.prefix) {
+        newName = `${config.prefix}_${lang}_${prop}`;
+      } else if (lang.length > 2) {
+        newName = `${lang}_${prop}`;
+      }
+
+      if (newName !== prop) {
+        fs.renameSync(`./dist/${lang}/${prop}`, `./dist/${lang}/${newName}`);
+      }
+
       stagingJson.banners[lang][prop].name = prop;
-      stagingJson.banners[lang][prop].file = `${lang}/${prop}`;
-      stagingJson.banners[lang][prop].url = `${prop}`;
+      stagingJson.banners[lang][prop].file = `${lang}/${newName}`;
+      stagingJson.banners[lang][prop].url = `${newName}`;
       stagingJson.banners[lang][prop].width = parseInt(aSizes[0]);
       stagingJson.banners[lang][prop].height = parseInt(aSizes[1]);
     });
@@ -271,8 +283,8 @@ gulp.task("publish", done => {
 
   stagingJson.numBanners = numBanners;
   stagingJson.version = pkg.version;
-  stagingJson.name = config.global.title;
-  stagingJson.client = config.global.client;
+  stagingJson.name = config.title;
+  stagingJson.client = config.client;
 
   fs.writeJSONSync("./dist/staging-template.json", stagingJson);
   done();
@@ -441,7 +453,8 @@ gulp.task("zip", done => {
         .src([`${dir}/**/*`])
         .pipe(
           $.zip(
-            `${pkg.name}_${bannerName}_${lang.toUpperCase()}_${dateStr}.zip`
+            `${config.prefix ||
+              pkg.name}_${bannerName}_${lang.toUpperCase()}_${dateStr}.zip`
           )
         )
         .pipe(gulp.dest("./dist/download"))
@@ -454,7 +467,8 @@ gulp.task("zip", done => {
 
             stagingJson.banners[lang][
               bannerName
-            ].zip = `/download/${pkg.name}_${bannerName}_${lang.toUpperCase()}_${dateStr}.zip`;
+            ].zip = `/download/${config.prefix ||
+              pkg.name}_${bannerName}_${lang.toUpperCase()}_${dateStr}.zip`;
             cb(null, chunk);
           })
         );

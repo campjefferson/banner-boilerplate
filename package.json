@@ -4,11 +4,9 @@
   "description": "New CJ Banner Creation Boilerplate",
   "main": "index.js",
   "config": {
-    "global": {
-      "title": "Banner Boilerplate",
-      "prefix": "Camp Jefferson",
-      "client": "camp jefferson"
-    },
+    "title": "Banner Boilerplate",
+    "prefix": "Camp_Jefferson_Banner_Boilerplate",
+    "client": "camp jefferson",
     "stagingEndpoint":
       "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c"
   },
