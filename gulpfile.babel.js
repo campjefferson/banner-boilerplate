@@ -271,13 +271,18 @@ gulp.task("publish", done => {
 
       if (newName !== prop) {
         fs.renameSync(`./dist/${lang}/${prop}`, `./dist/${lang}/${newName}`);
+
+        if (stagingJson.banners[lang][prop]) {
+          stagingJson.banners[lang][newName] = stagingJson.banners[lang][prop];
+          delete stagingJson.banners[lang][prop];
+        }
       }
 
-      stagingJson.banners[lang][prop].name = prop;
-      stagingJson.banners[lang][prop].file = `${lang}/${newName}`;
-      stagingJson.banners[lang][prop].url = `${newName}`;
-      stagingJson.banners[lang][prop].width = parseInt(aSizes[0]);
-      stagingJson.banners[lang][prop].height = parseInt(aSizes[1]);
+      stagingJson.banners[lang][newName].name = prop;
+      stagingJson.banners[lang][newName].file = `${lang}/${newName}`;
+      stagingJson.banners[lang][newName].url = `${newName}`;
+      stagingJson.banners[lang][newName].width = parseInt(aSizes[0]);
+      stagingJson.banners[lang][newName].height = parseInt(aSizes[1]);
     });
   });
 
