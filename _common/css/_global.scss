@@ -10,6 +10,9 @@ body {
   display: block;
   border: 1px solid black;
   overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
   @include size($bannerWidth - 2, $bannerHeight - 2);
 }
 

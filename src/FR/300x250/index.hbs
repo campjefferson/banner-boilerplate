@@ -1,0 +1,41 @@
+<!-- override clicktag script -->
+{{#content "clicktag" }} {{> clicktag/generic-with-clickarea }} {{/content }}
+<!-- /override clicktag script -->
+<!-- override vendor js script(s) -->
+{{#content "vendor-js" }} {{> vendor-js/jquery-tweenmax }} {{/content }}
+<!-- override vendor js script(s) -->
+{{#> banner }}
+<!-- main -->
+<div id="banner">
+    <div id="clickarea">
+        <div id="frame1" class="ad-element frame">
+            <div id="background-1" class="ad-element"></div>
+            <div class="ad-element copy1"></div>
+        </div>
+        <div id="frame2" class="ad-element frame">
+            <div id="background-2" class="ad-element"></div>
+        </div>
+        <div id="frame3" class="ad-element frame">
+            <div id="background-3" class="ad-element"></div>
+        </div>
+        <div id="frame4" class="ad-element frame">
+            <div id="background-4" class="ad-element"></div>
+            <div class="ad-element copy2"></div>
+        </div>
+        <div id="frame5" class="ad-element frame">
+            <div id="background-5" class="ad-element"></div>
+            <div class="ad-element copy3"></div>
+            <div id="logo" class="ad-element">
+                <div id="image" class="ad-element"></div>
+            </div>
+            <div id="cta" class="ad-element">
+                <div id="label" class="ad-element">
+                    <div id="chevron" class="ad-element"></div>
+                </div>
+            </div>
+        </div>
+        <div id="border" class="ad-element"></div>
+    </div>
+</div>
+<!-- /main -->
+{{/banner}}

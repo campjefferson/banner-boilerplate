@@ -138,6 +138,9 @@ gulp.task("handlebars", () => {
       $.tap((file, t) => {
         templateLocals.currentLocale = getLocaleFromFileName(file);
         templateLocals.size = getSizeFromFileName(file);
+        templateLocals.file = file;
+        templateLocals.title = `${config.title || pkg.name} | ${templateLocals
+          .size.w}x${templateLocals.size.h}`;
       })
     )
     .pipe($.compileHandlebars(templateLocals, options))
@@ -240,7 +243,7 @@ gulp.task("publish", done => {
   if (!PRODUCTION) {
     done();
   }
-  const dirs = glob.sync("./dist/*");
+  const dirs = glob.sync("./dist/{EN,FR}");
   const first = dirs[0].substr(2).split("/")[1];
   const gifBanner = config.gifBanner || `${first}/300x250`;
   const aGifBanner = gifBanner.split("/");
@@ -264,9 +267,9 @@ gulp.task("publish", done => {
 
       let newName = prop;
       if (config.prefix) {
-        newName = `${config.prefix}_${lang}_${prop}`;
+        newName = `${config.prefix}_${prop}_${lang}`;
       } else if (lang.length > 2) {
-        newName = `${lang}_${prop}`;
+        newName = `${prop}_${lang}`;
       }
 
       if (newName !== prop) {
@@ -417,33 +420,24 @@ gulp.task("zip", done => {
 
   const full = gulp
     .src("./dist/**/*")
-    .pipe($.zip(`${pkg.name}_${dateStr}.zip`))
+    .pipe($.zip(`${config.prefix || pkg.name}_${dateStr}.zip`))
     .pipe(gulp.dest("./dist/download"));
 
-  stagingJson.zip = `/download/${pkg.name}_${dateStr}.zip`;
+  stagingJson.zip = `/download/${config.prefix || pkg.name}_${dateStr}.zip`;
 
-  // const sets = glob.sync("./dist/*");
+  const sets = glob.sync("./dist/*");
 
-  // const langSeq = sets.map(dir => {
-  //   let aDir = dir.split("/");
-  //   let lang = aDir[2];
-  //   gulp.task(`Archive ${lang}`, () => {
-  //     return gulp
-  //       .src([`${dir}/**/*`])
-  //       .pipe($.zip(`${pkg.name}_${lang.toUpperCase()}_${dateStr}.zip`))
-  //       .pipe(gulp.dest("./dist/download"))
-  //       .pipe(
-  //         through.obj(function(chunk, enc, cb) {
-  //           stagingJson.banners[lang] = stagingJson.banners[lang] || {};
-  //           stagingJson.banners[
-  //             lang
-  //           ].zip = `/download/${pkg.name}_${lang.toUpperCase()}_${dateStr}.zip`;
-  //           cb(null, chunk);
-  //         })
-  //       );
-  //   });
-  //   return `Archive ${lang}`;
-  // });
+  const langSeq = sets.map(dir => {
+    let aDir = dir.split("/");
+    let lang = aDir[2];
+    gulp.task(`Archive ${lang}`, () => {
+      return gulp
+        .src([`${dir}/**/*`])
+        .pipe($.zip(`${config.prefix || pkg.name}_${lang}_ONLY_${dateStr}.zip`))
+        .pipe(gulp.dest("./dist/download"));
+    });
+    return `Archive ${lang}`;
+  });
 
   const banners = glob.sync("./dist/*/*");
   const seq = banners.map(dir => {
@@ -482,7 +476,7 @@ gulp.task("zip", done => {
     return `Archive ${name}`;
   });
 
-  return gulp.parallel(() => full, ...seq)(done);
+  return gulp.parallel(() => full, ...seq, ...langSeq)(done);
 });
 
 gulp.task("call-staging-endpoint", done => {
