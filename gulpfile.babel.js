@@ -405,28 +405,28 @@ gulp.task("zip", done => {
 
   stagingJson.zip = `/download/${pkg.name}_${dateStr}.zip`;
 
-  const sets = glob.sync("./dist/*");
+  // const sets = glob.sync("./dist/*");
 
-  const langSeq = sets.map(dir => {
-    let aDir = dir.split("/");
-    let lang = aDir[2];
-    gulp.task(`Archive ${lang}`, () => {
-      return gulp
-        .src([`${dir}/**/*`])
-        .pipe($.zip(`${pkg.name}_${lang.toUpperCase()}_${dateStr}.zip`))
-        .pipe(gulp.dest("./dist/download"))
-        .pipe(
-          through.obj(function(chunk, enc, cb) {
-            stagingJson.banners[lang] = stagingJson.banners[lang] || {};
-            stagingJson.banners[
-              lang
-            ].zip = `/download/${pkg.name}_${lang.toUpperCase()}_${dateStr}.zip`;
-            cb(null, chunk);
-          })
-        );
-    });
-    return `Archive ${lang}`;
-  });
+  // const langSeq = sets.map(dir => {
+  //   let aDir = dir.split("/");
+  //   let lang = aDir[2];
+  //   gulp.task(`Archive ${lang}`, () => {
+  //     return gulp
+  //       .src([`${dir}/**/*`])
+  //       .pipe($.zip(`${pkg.name}_${lang.toUpperCase()}_${dateStr}.zip`))
+  //       .pipe(gulp.dest("./dist/download"))
+  //       .pipe(
+  //         through.obj(function(chunk, enc, cb) {
+  //           stagingJson.banners[lang] = stagingJson.banners[lang] || {};
+  //           stagingJson.banners[
+  //             lang
+  //           ].zip = `/download/${pkg.name}_${lang.toUpperCase()}_${dateStr}.zip`;
+  //           cb(null, chunk);
+  //         })
+  //       );
+  //   });
+  //   return `Archive ${lang}`;
+  // });
 
   const banners = glob.sync("./dist/*/*");
   const seq = banners.map(dir => {
@@ -463,7 +463,7 @@ gulp.task("zip", done => {
     return `Archive ${name}`;
   });
 
-  return gulp.parallel(() => full, ...langSeq, ...seq)(done);
+  return gulp.parallel(() => full, ...seq)(done);
 });
 
 gulp.task("call-staging-endpoint", done => {
