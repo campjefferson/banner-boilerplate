@@ -1,22 +1,22 @@
  /* SCSS variables are information about icon's compiled state, stored under its original file
 name .icon-home { width: $icon-home-width; } The large array-like variables contain all information about a single icon $icon-home:
 x y offset_x offset_y width height total_width total_height image_path; At the bottom of this section, we provide information
-about the spritesheet itself $spritesheet: width height image $spritesheet-sprites; */    $copy_0-name: 'copy_0'; $copy_0-x: 0px; $copy_0-y: 0px; $copy_0-offset-x:
-0px; $copy_0-offset-y: 0px; $copy_0-width: 600px; $copy_0-height:
-500px; $copy_0-total-width: 1200px; $copy_0-total-height: 1000px; $copy_0-image:
-'img/spritesheets/copy.png'; $copy_0: (0px, 0px, 0px, 0px, 600px, 500px,
-1200px, 1000px, 'img/spritesheets/copy.png', 'copy_0', );  $copy_1-name: 'copy_1'; $copy_1-x: 600px; $copy_1-y: 0px; $copy_1-offset-x:
--600px; $copy_1-offset-y: 0px; $copy_1-width: 600px; $copy_1-height:
-500px; $copy_1-total-width: 1200px; $copy_1-total-height: 1000px; $copy_1-image:
-'img/spritesheets/copy.png'; $copy_1: (600px, 0px, -600px, 0px, 600px, 500px,
-1200px, 1000px, 'img/spritesheets/copy.png', 'copy_1', );  $copy_3-name: 'copy_3'; $copy_3-x: 0px; $copy_3-y: 500px; $copy_3-offset-x:
-0px; $copy_3-offset-y: -500px; $copy_3-width: 600px; $copy_3-height:
-500px; $copy_3-total-width: 1200px; $copy_3-total-height: 1000px; $copy_3-image:
-'img/spritesheets/copy.png'; $copy_3: (0px, 500px, 0px, -500px, 600px, 500px,
-1200px, 1000px, 'img/spritesheets/copy.png', 'copy_3', );   
+about the spritesheet itself $spritesheet: width height image $spritesheet-sprites; */    $copy1-name: 'copy1'; $copy1-x: 0px; $copy1-y: 0px; $copy1-offset-x:
+0px; $copy1-offset-y: 0px; $copy1-width: 600px; $copy1-height:
+500px; $copy1-total-width: 1200px; $copy1-total-height: 1000px; $copy1-image:
+'img/spritesheets/copy.png'; $copy1: (0px, 0px, 0px, 0px, 600px, 500px,
+1200px, 1000px, 'img/spritesheets/copy.png', 'copy1', );  $copy2-name: 'copy2'; $copy2-x: 600px; $copy2-y: 0px; $copy2-offset-x:
+-600px; $copy2-offset-y: 0px; $copy2-width: 600px; $copy2-height:
+500px; $copy2-total-width: 1200px; $copy2-total-height: 1000px; $copy2-image:
+'img/spritesheets/copy.png'; $copy2: (600px, 0px, -600px, 0px, 600px, 500px,
+1200px, 1000px, 'img/spritesheets/copy.png', 'copy2', );  $copy3-name: 'copy3'; $copy3-x: 0px; $copy3-y: 500px; $copy3-offset-x:
+0px; $copy3-offset-y: -500px; $copy3-width: 600px; $copy3-height:
+500px; $copy3-total-width: 1200px; $copy3-total-height: 1000px; $copy3-image:
+'img/spritesheets/copy.png'; $copy3: (0px, 500px, 0px, -500px, 600px, 500px,
+1200px, 1000px, 'img/spritesheets/copy.png', 'copy3', );   
 $spritesheet-width: 1200px; $spritesheet-height: 1000px;
 $spritesheet-image: 'img/spritesheets/copy.png'; $spritesheet-sprites:
-($copy_0, $copy_1, $copy_3, ); $spritesheet: (1200px, 1000px,
+($copy1, $copy2, $copy3, ); $spritesheet: (1200px, 1000px,
 'img/spritesheets/copy.png', $spritesheet-sprites, );  
 /* The provided mixins are intended to be used with the array-like variables .icon-home { @include sprite-width($icon-home);
 } .icon-email { @include sprite($icon-email); } */   @mixin sprite-width($sprite)

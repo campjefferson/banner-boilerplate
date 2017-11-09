@@ -1,7 +1,3 @@
-@function pixels ($num) {
-  @return $num+px;
-}
-
 // Quickly set the x, y position of an ad-element
 @mixin position($x:0, $y:0) {
   @if $x == "center" {
@@ -23,6 +19,15 @@
 @mixin size($width:0, $height:0) {
   width: $width + 0px;
   height: $height + 0px;
+}
+
+@mixin retina-image-background-size($width:0, $height:0) {
+  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+  @include size($width, $height);
+  background-size: $width + 0px $height + 0px;
+  background-repeat: no-repeat;
 }
 
 // Detect retina displays

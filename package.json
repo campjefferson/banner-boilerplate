@@ -4,9 +4,10 @@
   "description": "New CJ Banner Creation Boilerplate",
   "main": "index.js",
   "config": {
-    "locales": ["en", "fr"],
     "global": {
-      "prefix": "Porsche"
+      "title": "Banner Boilerplate",
+      "prefix": "Camp Jefferson",
+      "client": "camp jefferson"
     },
     "stagingEndpoint":
       "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c"
@@ -76,10 +77,5 @@
     "webpack": "^3.5.6",
     "webpack-stream": "^4.0.0",
     "yargs": "^8.0.2"
-  },
-  "dependencies": {
-    "animejs": "^2.0.2",
-    "gsap": "^1.20.2",
-    "jquery": "^3.2.1"
   }
 }

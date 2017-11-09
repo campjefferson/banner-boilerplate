@@ -6,23 +6,9 @@ body {
   padding: 0;
 }
 
-.frame {
-  @include size($bannerWidth, $bannerHeight);
-  border: 1px solid black;
-}
-
 #ad {
   display: block;
   border: 1px solid black;
-  overflow: hidden;
-  cursor: pointer;
-
-  @include size($bannerWidth - 2, $bannerHeight - 2);
-}
-
-#banner {
-  position: absolute;
-  display: block;
   overflow: hidden;
   @include size($bannerWidth - 2, $bannerHeight - 2);
 }

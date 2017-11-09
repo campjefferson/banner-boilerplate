@@ -4,10 +4,16 @@
     <!-- inline (production) or external (dev) css -->
     <link rel="stylesheet" href="banner.css" inline>
     <meta name="ad.size" content="width={{size.w}},height={{size.h}}">
+    <!-- clicktag -->
+    {{#block "clicktag" }} {{> clicktag/generic }} {{/block}}
+    <!-- /clicktag -->
+    <!-- vendor javascript--->
+    {{#block "vendor-js" }} {{> vendor-js/tweenmax }} {{/block }}
+    <!-- /vendor javascript--->
 </head>
 
 <body>
-    <div class="frame">
+    <div id="ad">
         {{> @partial-block }}
     </div>
     <!-- inline (production) or external (dev) js -->
