@@ -1,0 +1,20 @@
+<script type="text/javascript" src="https://h5.adgear.com/v1/js/html5.min.js"></script>
+<script>
+    var clickTag = "http://www.google.ca";
+    var clickarea;
+
+    var domReady = function (callback) {
+        document.readyState === "interactive" || document.readyState === "complete"
+            ? callback()
+            : document.addEventListener("DOMContentLoaded", callback);
+    };
+
+    domReady(function () {
+        clickarea = document.getElementById("ad");
+        clickarea.addEventListener("click", exit);
+    });
+
+    function exit() {
+        ADGEAR.html5.clickThrough("clickTAG");
+    }
+</script>
