@@ -7,8 +7,7 @@
     "title": "Banner Boilerplate",
     "prefix": "Banner-Boilerplate",
     "client": "Koodo",
-    "stagingEndpoint":
-      "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c"
+    "stagingEndpoint": "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c"
   },
   "scripts": {
     "test": "npm test",
@@ -19,16 +18,17 @@
     "production": "gulp --production",
     "production-start": "gulp production-start --production",
     "production-end": "gulp production-end --production",
-    "all":
-      "npm run production-start && npm run backups && npm run production-end"
+    "all": "npm run production-start && npm run backups && npm run production-end"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/campjefferson/banner-boilerplate.git"
   },
-  "keywords": ["html5", "banner"],
-  "author":
-    "Anthony Sapp <anthony.sapp@campjefferson.com>, Peerum You <peerum.you@campjefferson.com>",
+  "keywords": [
+    "html5",
+    "banner"
+  ],
+  "author": "Anthony Sapp <anthony.sapp@campjefferson.com>, Peerum You <peerum.you@campjefferson.com>",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/campjefferson/banner-boilerplate/issues"

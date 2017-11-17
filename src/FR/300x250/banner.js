@@ -1,3 +1,5 @@
+import { getElements, getElement } from "common/getElements";
+
 (function() {
   var elements = {};
   var clickarea = document.getElementById("clickarea");
@@ -14,20 +16,6 @@
     events();
     animate();
   });
-
-  function getElements() {
-    document.querySelectorAll(".ad-element").forEach(element => {
-      element.classList.forEach(elClass => {
-        if (!elements[elClass]) {
-          elements[elClass] = element;
-        }
-      });
-    });
-  }
-
-  function getElement(id) {
-    return elements[id];
-  }
 
   function events() {
     clickarea.addEventListener("mouseover", rollover);
