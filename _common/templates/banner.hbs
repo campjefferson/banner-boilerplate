@@ -1,23 +1,15 @@
 <html lang="{{currentLocale}}">
 
 <head>
-    <title>{{{title}}}</title>
-    <!-- inline (production) or external (dev) css -->
     <link rel="stylesheet" href="banner.css" inline>
     <meta name="ad.size" content="width={{size.w}},height={{size.h}}">
-    <!-- clicktag -->
-    {{#block "clicktag" }} {{> clicktag/generic }} {{/block}}
-    <!-- /clicktag -->
-    <!-- vendor javascript--->
-    {{#block "vendor-js" }} {{> vendor-js/tweenmax }} {{/block }}
-    <!-- /vendor javascript--->
+    <script>var clickTag = "http://www.google.ca";</script> {{> vendor-js}}
 </head>
 
 <body>
     <div id="ad">
         {{> @partial-block }}
     </div>
-    <!-- inline (production) or external (dev) js -->
     <script src="banner.js" inline></script>
 </body>
 

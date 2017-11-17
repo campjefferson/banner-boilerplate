@@ -4,9 +4,9 @@
   "description": "New CJ Banner Creation Boilerplate",
   "main": "index.js",
   "config": {
-    "title": "Banner Boilerplate",
-    "prefix": "Camp_Jefferson_Banner_Boilerplate",
-    "client": "camp jefferson",
+    "title": "Performance Digital Black Friday Generic",
+    "prefix": "PD-BlackFriday-Generic",
+    "client": "Koodo",
     "stagingEndpoint":
       "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c"
   },
@@ -14,8 +14,13 @@
     "test": "npm test",
     "start": "gulp",
     "dev": "gulp",
+    "backups": "babel-node backups",
     "spritesheet": "gulp spritesheet",
-    "production": "gulp --production"
+    "production": "gulp --production",
+    "production-start": "gulp production-start --production",
+    "production-end": "gulp production-end --production",
+    "all":
+      "npm run production-start && npm run backups && npm run production-end"
   },
   "repository": {
     "type": "git",
@@ -31,7 +36,6 @@
   "homepage": "https://github.com/campjefferson/banner-boilerplate#readme",
   "devDependencies": {
     "axios": "^0.17.0",
-    "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "7.1.1",
@@ -44,6 +48,7 @@
     "fs-extra": "^4.0.2",
     "gifencoder": "^1.1.0",
     "glob": "^7.1.2",
+    "gm": "^1.23.0",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-append-prepend": "^1.0.4",
     "gulp-compile-handlebars": "^0.6.1",
@@ -69,6 +74,7 @@
     "gulp.spritesmith": "^6.5.1",
     "lodash": "^4.17.4",
     "merge-stream": "^1.0.1",
+    "phantom": "^4.0.7",
     "through2": "^2.0.3",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "uuid": "^3.1.0",

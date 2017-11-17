@@ -10,8 +10,16 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: "babel-loader"
+        loader: "babel-loader",
+        options: {
+          presets: ["es2015"]
+        }
       }
     ]
+  },
+  resolve: {
+    alias: {
+      common: path.resolve(__dirname, "_common/js/")
+    }
   }
 };

@@ -125,11 +125,7 @@ gulp.task("handlebars", () => {
   const options = {
     ignorePartials: true,
     helpers,
-    batch: [
-      "./_common/templates",
-      "./_common/templates/vendor-js",
-      "./_common/templates/clicktag"
-    ]
+    batch: ["./_common/templates"]
   };
 
   return gulp
@@ -138,9 +134,6 @@ gulp.task("handlebars", () => {
       $.tap((file, t) => {
         templateLocals.currentLocale = getLocaleFromFileName(file);
         templateLocals.size = getSizeFromFileName(file);
-        templateLocals.file = file;
-        templateLocals.title = `${config.title || pkg.name} | ${templateLocals
-          .size.w}x${templateLocals.size.h}`;
       })
     )
     .pipe($.compileHandlebars(templateLocals, options))
@@ -248,13 +241,6 @@ gulp.task("publish", done => {
   const gifBanner = config.gifBanner || `${first}/300x250`;
   const aGifBanner = gifBanner.split("/");
 
-  fs.copySync(
-    `./dist/${gifBanner}/${aGifBanner[1]}.gif`,
-    `./dist/thumbnail.gif`
-  );
-
-  stagingJson.thumbnail = "thumbnail.gif";
-
   const now = new Date();
   stagingJson.lastModified = now;
 
@@ -273,6 +259,14 @@ gulp.task("publish", done => {
       }
 
       if (newName !== prop) {
+        try {
+          fs.moveSync(
+            `./dist/${lang}/${prop}/${prop}.gif`,
+            `./dist/download/${newName}.gif`
+          );
+        } catch (e) {
+          // nothing if there's no gif
+        }
         fs.renameSync(`./dist/${lang}/${prop}`, `./dist/${lang}/${newName}`);
 
         if (stagingJson.banners[lang][prop]) {
@@ -312,7 +306,7 @@ gulp.task("spritesheet", done => {
       variableNameTransforms: ["dasherize"],
       imgName: `${spriteName}.png`,
       cssName: `${spriteName}.scss`,
-      cssTemplate: `./_common/css/spritesmith.retina.only.template.handlebars`
+      cssTemplate: `./_common/templates/spritesmith.retina.only.template.handlebars`
     };
 
     if (MULTI_RES) {
@@ -402,43 +396,13 @@ gulp.task("prune", done => {
   }
 });
 
-gulp.task("backups", done => {
-  let filepath;
-  return gulp
-    .src(`./src/*/*/*.png`)
-    .pipe(
-      $.gm(function(gmfile) {
-        return gmfile.setFormat("gif");
-      })
-    )
-    .pipe(gulp.dest(`./dist`));
+gulp.task("move-backups", done => {
+  return gulp.src("./_backups/*.gif").pipe(gulp.dest("./dist/download/"));
 });
 
-gulp.task("zip", done => {
+gulp.task("individual-banner-zip", done => {
   const date = new Date();
   const dateStr = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-
-  const full = gulp
-    .src("./dist/**/*")
-    .pipe($.zip(`${config.prefix || pkg.name}_${dateStr}.zip`))
-    .pipe(gulp.dest("./dist/download"));
-
-  stagingJson.zip = `/download/${config.prefix || pkg.name}_${dateStr}.zip`;
-
-  const sets = glob.sync("./dist/*");
-
-  const langSeq = sets.map(dir => {
-    let aDir = dir.split("/");
-    let lang = aDir[2];
-    gulp.task(`Archive ${lang}`, () => {
-      return gulp
-        .src([`${dir}/**/*`])
-        .pipe($.zip(`${config.prefix || pkg.name}_${lang}_ONLY_${dateStr}.zip`))
-        .pipe(gulp.dest("./dist/download"));
-    });
-    return `Archive ${lang}`;
-  });
-
   const banners = glob.sync("./dist/*/*");
   const seq = banners.map(dir => {
     let aDir = dir.split("/");
@@ -450,12 +414,7 @@ gulp.task("zip", done => {
     gulp.task(`Archive ${name}`, () => {
       return gulp
         .src([`${dir}/**/*`])
-        .pipe(
-          $.zip(
-            `${config.prefix ||
-              pkg.name}_${bannerName}_${lang.toUpperCase()}_${dateStr}.zip`
-          )
-        )
+        .pipe($.zip(`${bannerName}_${dateStr}.zip`))
         .pipe(gulp.dest("./dist/download"))
         .pipe(
           through.obj(function(chunk, enc, cb) {
@@ -466,8 +425,7 @@ gulp.task("zip", done => {
 
             stagingJson.banners[lang][
               bannerName
-            ].zip = `/download/${config.prefix ||
-              pkg.name}_${bannerName}_${lang.toUpperCase()}_${dateStr}.zip`;
+            ].zip = `/download/${config.prefix || pkg.name}_${dateStr}.zip`;
             cb(null, chunk);
           })
         );
@@ -476,8 +434,43 @@ gulp.task("zip", done => {
     return `Archive ${name}`;
   });
 
-  return gulp.parallel(() => full, ...seq, ...langSeq)(done);
+  return gulp.parallel(...seq)(done);
 });
+
+gulp.task("language-zip", done => {
+  const date = new Date();
+  const dateStr = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  const sets = glob.sync("./dist/{EN,FR}");
+
+  const seq = sets.map(dir => {
+    let aDir = dir.split("/");
+    let lang = aDir[2];
+    gulp.task(`Archive ${lang}`, () => {
+      return gulp
+        .src([`${dir}/**/*`])
+        .pipe($.zip(`${config.prefix || pkg.name}_${lang}_ONLY_${dateStr}.zip`))
+        .pipe(gulp.dest("./dist/download"));
+    });
+    return `Archive ${lang}`;
+  });
+  return gulp.parallel(...seq)(done);
+});
+
+gulp.task("full-zip", done => {
+  const date = new Date();
+  const dateStr = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+  stagingJson.zip = `/download/${config.prefix || pkg.name}_${dateStr}.zip`;
+
+  return gulp
+    .src("./dist/download/*.{gif,zip}")
+    .pipe($.zip(`${config.prefix || pkg.name}_${dateStr}.zip`))
+    .pipe(gulp.dest("./dist/download"));
+});
+
+gulp.task(
+  "zip",
+  gulp.series("individual-banner-zip", "full-zip", "language-zip")
+);
 
 gulp.task("call-staging-endpoint", done => {
   if (!config.stagingEndpoint) {
@@ -494,12 +487,12 @@ gulp.task("default", done => {
       gulp.parallel("js", "css", "assets"),
       "handlebars",
       "inline",
-      "backups",
       "prune",
       "size",
       "delete-temp",
-      "zip",
       "publish",
+      "move-backups",
+      "zip",
       "call-staging-endpoint"
     )(done);
   }
@@ -512,6 +505,24 @@ gulp.task("default", done => {
     "server",
     "watch"
   )(done);
+});
+
+gulp.task("production-start", done => {
+  return gulp.series(
+    "clean",
+    "spritesheet",
+    gulp.parallel("js", "css", "assets"),
+    "handlebars",
+    "inline",
+    "prune",
+    "size",
+    "delete-temp",
+    "publish"
+  )(done);
+});
+
+gulp.task("production-end", done => {
+  return gulp.series("move-backups", "zip", "call-staging-endpoint")(done);
 });
 
 gulp.task("server", done => {
