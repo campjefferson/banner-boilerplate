@@ -5,13 +5,13 @@
     <meta name="ad.size" content="width={{size.w}},height={{size.h}}">
     <script>var clickTag = "http://www.google.ca";</script>
 
-    {{#block "clicktag" }}
-        {{> clicktag/adgear }}
-    {{/block}}
-
     {{#block "vendor-js" }}
         {{> vendor-js/adgear }}
         {{> vendor-js/tweenmax }}
+    {{/block}}
+
+    {{#block "clicktag" }}
+        {{> clicktag/adgear }}
     {{/block}}
     
 </head>
