@@ -21,10 +21,12 @@
   height: $height + 0px;
 }
 
-@mixin retina-image-background-size($width:0, $height:0) {
-  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
-  image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;
+@mixin retina-image-background-size($width:0, $height:0, $crispedges:true) {
+  @if ($crispedges) {
+    image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+  }
   @include size($width, $height);
   background-size: $width + 0px $height + 0px;
   background-repeat: no-repeat;

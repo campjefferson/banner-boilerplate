@@ -1,0 +1,19 @@
+<script>
+    var clickTAG = "http://www.google.ca";
+    var clickarea;
+
+    var domReady = function (callback) {
+        document.readyState === "interactive" || document.readyState === "complete"
+            ? callback()
+            : document.addEventListener("DOMContentLoaded", callback);
+    };
+
+    domReady(function () {
+        clickarea = document.getElementById("ad");
+        clickarea.addEventListener("click", exit);
+    });
+
+    function exit() {
+        ADGEAR.html5.clickThrough("clickTAG");
+    }
+</script>

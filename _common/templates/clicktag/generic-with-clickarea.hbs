@@ -1,0 +1,19 @@
+<script>
+    var clickTag = "http://www.google.ca";
+    var clickarea;
+
+    var domReady = function (callback) {
+        document.readyState === "interactive" || document.readyState === "complete"
+            ? callback()
+            : document.addEventListener("DOMContentLoaded", callback);
+    };
+
+    domReady(function () {
+        clickarea = document.getElementById("clickarea");
+        clickarea.addEventListener("click", exit);
+    });
+
+    function exit() {
+        window.open(clickTag, "_blank");
+    }
+</script>
