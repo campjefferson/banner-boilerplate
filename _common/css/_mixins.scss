@@ -15,10 +15,22 @@
   }
 }
 
+
 // Set the width, height of an ad-element
 @mixin size($width:0, $height:0) {
   width: $width + 0px;
   height: $height + 0px;
+}
+
+
+// Detect retina displays
+@mixin retina {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+    only screen and (-moz-min-device-pixel-ratio: 1.5),
+    only screen and (-o-min-device-pixel-ratio: 3/2),
+    only screen and (min-device-pixel-ratio: 1.5) {
+    @content;
+  }
 }
 
 @mixin retina-image-background-size($width:0, $height:0, $crispedges:true) {
@@ -30,14 +42,4 @@
   @include size($width, $height);
   background-size: $width + 0px $height + 0px;
   background-repeat: no-repeat;
-}
-
-// Detect retina displays
-@mixin retina {
-  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-    only screen and (-moz-min-device-pixel-ratio: 1.5),
-    only screen and (-o-min-device-pixel-ratio: 3/2),
-    only screen and (min-device-pixel-ratio: 1.5) {
-    @content;
-  }
 }
