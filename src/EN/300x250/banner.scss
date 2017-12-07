@@ -19,3 +19,10 @@ $background-color: #ccc;
 .frame {
   @include size($bannerWidth, $bannerHeight);
 }
+
+#legal-bubble {
+  @include koodo-legals(95%);
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 30px;
+}

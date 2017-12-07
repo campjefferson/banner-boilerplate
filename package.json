@@ -7,7 +7,8 @@
     "title": "Banner Boilerplate",
     "prefix": "Banner-Boilerplate",
     "client": "Koodo",
-    "stagingEndpoint": "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c"
+    "stagingEndpoint": "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c",
+    "locales": ["en", "fr"]
   },
   "scripts": {
     "test": "npm test",
