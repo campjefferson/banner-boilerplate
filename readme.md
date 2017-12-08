@@ -31,9 +31,19 @@ You can also edit the `package.json` file and fill details about your project.
 
 ## Usage
 
+### Handlebars
+The boilerplate uses Handlebars as a templating engine, making clicktags and language locales easily swappable and accessible.
+
 ### CSS
+Sass is used for all of the styling.
 
 #### Classes
+
+```html
+<div id="frame1" class="ad-element frame">
+    <div class="ad-element copy1"></div>
+</div>
+```
 
 - `.ad-element` used for every element within the banner.
 - `.frame` used to group frames of animation.
@@ -45,13 +55,15 @@ You can also edit the `package.json` file and fill details about your project.
 
 #### Mixins
 
-- `@include size($width, $height)` to quickly set the width and height of an element.
-- `@include position($x, $y)` to quickly set the x, y co-ordinates of an element. Parameters can also accept `center` as a value.
-- `@include koodo-legals($width, $position)` to create a Koodo style legal bubble. You can set the width of the bubble as well as it's orientation with either `left`, `center`, or by default, `right`.
-- `@include retina{}` a media query for detecting retina displays.
+- `size($width, $height)` to quickly set the width and height of an element.
+- `position($x, $y)` to quickly set the x, y co-ordinates of an element. Parameters can also accept `center` as a value.
+- `koodo-legals($width, $position)` to create a Koodo style legal bubble. You can set the width of the bubble as well as it's orientation with either `left`, `center`, or by default, `right`.
+- `retina{}` a media query for detecting retina displays.
 
 ### Javascript
-- `getElement("sprite");` to retrieve a sprite element from a spritesheet.
+ES6 is used along with GSAP's TweenLite/TweenMax for any animations.
+
+- `getElement("sprite")` to retrieve a sprite element from a spritesheet.
 
 ### Build Commands
 
