@@ -31,7 +31,11 @@ You can also edit the `package.json` file and fill details about your project.
 
 ## Usage
 
+### Handlebars
+The boilerplate uses Handlebars as a templating engine, making clicktags and language locales easily swappable and accessible.
+
 ### CSS
+Sass is used for all of the styling.
 
 #### Classes
 
@@ -51,6 +55,8 @@ You can also edit the `package.json` file and fill details about your project.
 - `@include retina{}` a media query for detecting retina displays.
 
 ### Javascript
+ES6 is used along with GSAP's TweenLite/TweenMax for any animations.
+
 - `getElement("sprite");` to retrieve a sprite element from a spritesheet.
 
 ### Build Commands
