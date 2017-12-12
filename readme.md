@@ -34,6 +34,10 @@ You can also edit the `package.json` file and fill details about your project.
 ### Handlebars
 The boilerplate uses Handlebars as a templating engine, making clicktags and language locales easily swappable and accessible.
 
+- `{{#content "clicktag"}}{{/content }}` to override the global clicktag.
+- `{{#content "vendor-js"}}{{/content }}` to override the global vendor-js scripts.
+- `{{__ "key"}}` to access the value of a key in a locale.
+
 ### CSS
 Sass is used for all of the styling.
 
