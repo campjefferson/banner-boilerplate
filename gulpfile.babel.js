@@ -31,13 +31,7 @@ const { locales, global, banners } = config;
 
 let templateLocals = { locales: {} };
 let stagingJson = { banners: {} };
-if (locales) {
-  locales.forEach(locale => {
-    templateLocals.locales[locale] = fs.readJsonSync(
-      `./_locales/${locale}.json`
-    );
-  });
-}
+
 
 const getSizeFromFileName = file => {
   const filePath = path.relative(__dirname, file.path);
@@ -50,7 +44,7 @@ const getLocaleFromFileName = (file, defaultLocale = "en") => {
   let loc = defaultLocale;
   if (locales && locales.length) {
     locales.forEach(locale => {
-      if (file.path.indexOf(`/${locale}/`) >= 0) {
+      if (file.path.toLowerCase().indexOf(`/${locale}/`) >= 0) {
         loc = locale;
       }
     });
@@ -127,6 +121,14 @@ gulp.task("handlebars", () => {
     helpers,
     batch: ["./_common/templates"]
   };
+
+  if (locales) {
+    locales.forEach(locale => {
+      templateLocals.locales[locale] = fs.readJsonSync(
+        `./_locales/${locale}.json`
+      );
+    });
+  }
 
   return gulp
     .src("./src/**/*.hbs")
@@ -554,4 +556,5 @@ gulp.task("watch", done => {
     gulp.series("assets", "reload")
   );
   gulp.watch(["./src/**/*.{hbs,html}"], gulp.series("handlebars", "reload"));
+  gulp.watch(["./_locales/**/*.json"], gulp.series("handlebars", "reload"));
 });
