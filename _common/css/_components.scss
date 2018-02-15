@@ -42,3 +42,24 @@
     box-sizing: border-box;
     @include size($bannerWidth - 2, $bannerHeight - 2);
 }
+
+@mixin porsche-footer($orientation:"bigbox") {
+    background-color: white;
+
+    @if $orientation == "bigbox" {
+        bottom: 0;
+        @include size($bannerWidth, 50);
+    }
+    @else if $orientation == "halfpage" {
+        bottom: 0;
+        @include size($bannerWidth, 75);
+    }
+    @else if $orientation == "leaderboard" {
+        right: 0;
+        @include size(110, $bannerHeight);
+    }
+    @else if $orientation == "mobile" {
+        right: 0;
+        @include size(82, $bannerHeight);
+    }
+}
