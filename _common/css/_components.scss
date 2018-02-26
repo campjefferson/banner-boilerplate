@@ -1,3 +1,44 @@
+// Globals
+@mixin chevron($size, $colour, $thickness:2px, $direction:"right") {
+
+    &::before {
+        border-style: solid;
+        border-width: $thickness $thickness 0 0;
+        border-color: $colour;
+        content: '';
+        display: inline-block;
+        height: $size + 0px;
+        left: 0.15em;
+        position: relative;
+        top: 0.15em;
+        transform: rotate(-45deg);
+        vertical-align: top;
+        width: $size + 0px;
+    }
+
+    @if $direction == "right" {
+        &.right::before {
+            transform: rotate(45deg);
+        }
+    }
+    @else if $direction == "left" {
+        &.left:before {
+            transform: rotate(-135deg);
+        }
+    }
+    @else if $direction == "up" {
+        &.left:before {
+            transform: rotate(-45);
+        }
+    }
+    @else if $direction == "down" {
+        &.left:before {
+            transform: rotate(135deg);
+        }
+    }
+
+}
+
 // Koodo
 @mixin koodo-legals($width:100%, $position:"right") {
     box-sizing: border-box;
