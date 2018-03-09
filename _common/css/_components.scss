@@ -92,20 +92,24 @@
 @mixin porsche-footer($orientation:"bigbox") {
     background-color: white;
 
-    @if $orientation == "bigbox" {
+    @if $orientation == "300x250" {
         bottom: 0;
         @include size($bannerWidth, 50);
     }
-    @else if $orientation == "halfpage" {
+    @else if $orientation == "300x600" {
         bottom: 0;
         @include size($bannerWidth, 75);
     }
-    @else if $orientation == "leaderboard" {
+    @else if $orientation == "728x90" {
         right: 0;
         @include size(110, $bannerHeight);
     }
-    @else if $orientation == "mobile" {
+    @else if $orientation == "300x50" {
         right: 0;
         @include size(82, $bannerHeight);
+    }
+    @else if $orientation == "320x50" {
+        right: 0;
+        @include size(94, $bannerHeight);
     }
 }
