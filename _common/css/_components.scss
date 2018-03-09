@@ -84,7 +84,7 @@
 
 // Porsche
 @mixin porsche-border($thickness) {
-    border: $thickness solid white;
+    border: $thickness + 0px solid white;
     box-sizing: border-box;
     @include size($bannerWidth - 2, $bannerHeight - 2);
 }
