@@ -3,6 +3,7 @@
   @if $x == "center" {
     left: 50%;
     transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
   } @else {
     left: $x + 0px;
   }
@@ -10,6 +11,7 @@
   @if $y == "center" {
     top: 50%;
     transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
   } @else {
     top: $y + 0px;
   }

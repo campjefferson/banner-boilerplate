@@ -75,6 +75,7 @@
         @else if $position == "center" {
             left: 50%;
             transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
         }
         @else {
             right: 10px;
