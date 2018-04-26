@@ -90,7 +90,7 @@
     @include size($bannerWidth - 2, $bannerHeight - 2);
 }
 
-@mixin porsche-footer($orientation:"bigbox") {
+@mixin porsche-footer($orientation:"300x250") {
     background-color: white;
 
     @if $orientation == "300x250" {
