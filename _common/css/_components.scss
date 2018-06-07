@@ -83,6 +83,15 @@
     }
 }
 
+@mixin koodo-cut($width, $height, $color, $skewX:0, $skewY:0) {
+    display: block;
+    width: $width + 0px;
+    height: $height + 0px;
+    background-color: $color;
+    transform: skew($skewX + 0deg, $skewY + 0deg);
+    -webkit-transform: skew($skewX, $skewY);
+}
+
 // Porsche
 @mixin porsche-border($thickness) {
     border: $thickness + 0px solid white;
