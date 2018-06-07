@@ -1,0 +1,46 @@
+@mixin koodo-legals($width:100%, $position:"right") {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 10px;
+    font-family: "Arial";
+    font-size: 10px;
+    text-align: left;
+    width: $width;
+    min-height: 30px;
+
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 6px 5px 0 5px;
+        border-color: white transparent transparent transparent;
+        bottom: -6px;
+
+        @if $position == "left" {
+            left: 10px;
+        }
+        @else if $position == "center" {
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+        }
+        @else {
+            right: 10px;
+        }
+    }
+}
+
+@mixin koodo-cut($width, $height, $color, $skewX:0, $skewY:0) {
+    display: block;
+    width: $width + 0px;
+    height: $height + 0px;
+    background-color: $color;
+    transform: skew($skewX + 0deg, $skewY + 0deg);
+    -webkit-transform: skew($skewX, $skewY);
+}
