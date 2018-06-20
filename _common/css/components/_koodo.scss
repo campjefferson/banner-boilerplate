@@ -42,5 +42,5 @@
     height: $height + 0px;
     background-color: $color;
     transform: skew($skewX + 0deg, $skewY + 0deg);
-    -webkit-transform: skew($skewX, $skewY);
+    -webkit-transform: skew($skewX + 0deg, $skewY + 0deg);
 }
