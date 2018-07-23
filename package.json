@@ -8,7 +8,10 @@
     "prefix": "Banner-Boilerplate",
     "client": "Koodo",
     "stagingEndpoint": "https://api.netlify.com/build_hooks/5a00b9120b79b703b93d0c8c",
-    "locales": ["en", "fr"]
+    "locales": [
+      "en",
+      "fr"
+    ]
   },
   "scripts": {
     "test": "npm test",
@@ -65,7 +68,7 @@
     "gulp-notify": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.6.1",
-    "gulp-sass": "^3.1.0",
+    "gulp-sass": "^3.2.1",
     "gulp-sass-variables": "^1.1.1",
     "gulp-sequence": "^0.4.6",
     "gulp-size": "^2.1.0",
